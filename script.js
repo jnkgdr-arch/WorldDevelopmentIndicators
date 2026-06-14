@@ -394,9 +394,16 @@ function renderComponentCharts() {
       x: componentData.map(country => country[segment.key] ?? 0),
       text: componentData.map(country => country[segment.key] === null ? "" : country[segment.key]),
       texttemplate: "%{text}",
-      textposition: "inside",
-      insidetextanchor: "middle",
-      customdata: componentData.map(country => [
+textposition: "inside",
+insidetextanchor: "middle",
+textfont: {
+  color: segment.key === "tradeFreedom" ? "#ffffff" : "#ffffff",
+  size: 12
+},
+insidetextfont: {
+  color: "#ffffff"
+},
+customdata: componentData.map(country => [
         country.overallScore === null ? "N/A" : country.overallScore,
         country.worldRank,
         `$${Math.round(country.perCapitaGDP).toLocaleString()}`,
