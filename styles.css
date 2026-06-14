@@ -728,3 +728,62 @@ main {
     min-height: 540px;
   }
 }
+/* Glass effect for Index of Economic Freedom and Economic Freedom Components graphs */
+#freedom .chart-wrap,
+#components .chart-wrap {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.14),
+      rgba(255, 255, 255, 0.06)
+    );
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow:
+    0 28px 80px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -24px 48px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+/* Subtle glass shine overlay */
+#freedom .chart-wrap::before,
+#components .chart-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(255, 255, 255, 0.22), transparent 28%),
+    linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0.16),
+      transparent 34%,
+      transparent 70%,
+      rgba(255, 255, 255, 0.08)
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Keeps Plotly charts above the glass shine */
+#freedom .chart,
+#components .chart {
+  position: relative;
+  z-index: 1;
+}
+
+/* Optional: make chart cards feel more premium on hover */
+#freedom .chart-wrap:hover,
+#components .chart-wrap:hover {
+  transform: translateY(-3px);
+  border-color: rgba(249, 115, 22, 0.34);
+  box-shadow:
+    0 34px 90px rgba(0, 0, 0, 0.46),
+    0 0 28px rgba(249, 115, 22, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.24);
+}
+
+#freedom .chart-wrap,
+#components .chart-wrap {
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
