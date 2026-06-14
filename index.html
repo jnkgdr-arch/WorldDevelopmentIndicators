@@ -126,12 +126,12 @@
 
     <section id="bubble" class="viz-section reveal">
       <div class="section-copy">
-        <p class="eyebrow">Geographic bubble chart</p>
-        <h2>GDP and population reveal different kinds of economic weight.</h2>
-        <p>
-          Bubble size compares GDP while color compares population, showing why populous
-          countries can be central to global demand even when per-person output differs.
-        </p>
+        <p class="eyebrow">Geographic heat map</p>
+<h2>GDP heat intensity shows national economic scale.</h2>
+<p>
+  The heat map compares GDP across selected countries, while hover labels provide
+  population and GDP per capita context for each economy.
+</p>
       </div>
 
       <div class="chart-wrap map-tile">
@@ -158,22 +158,24 @@
         <div id="freedomMap" class="chart"></div>
       </div>
 
-      <div class="sunburst-grid">
-        <div class="chart-wrap">
-          <div id="overallScoreSunburst" class="chart"></div>
-        </div>
+      <div class="bar-chart-grid">
+  <div class="chart-wrap">
+    <div id="overallScoreBar" class="chart"></div>
+  </div>
 
-        <div class="chart-wrap">
-          <div id="worldRankSunburst" class="chart"></div>
-        </div>
+  <div class="chart-wrap">
+    <div id="worldRankBar" class="chart"></div>
+  </div>
 
-        <div class="chart-wrap">
-          <div id="gdpSunburst" class="chart"></div>
-        </div>
-      </div>
+  <div class="chart-wrap">
+    <div id="gdpPerCapitaBar" class="chart"></div>
+  </div>
+</div>
 
       <p class="caption">
-        Caption: Overall scores, world rank, and component definitions are based on the 2025 Index of Economic Freedom dataset.
+        The stacked bar chart compares property rights, business freedom, trade freedom,
+and financial freedom across selected countries for the 2025 index year. The
+bar charts below summarize overall score, world rank strength, and GDP per capita.
       </p>
     </section>
 
@@ -188,10 +190,17 @@
         </p>
       </div>
 
-      <div id="componentCharts" class="component-grid"></div>
+      <div class="chart-wrap">
+  <div id="componentCharts" class="chart"></div>
+</div>
 
       <p class="caption">
-        Caption: Component bars reference the Index of Economic Freedom categories listed in the supplied dataset.
+        <p>
+  A stacked bar chart compares property rights, business freedom, trade freedom,
+  and financial freedom across all countries in one view. These components help
+  separate broad national performance from the specific rules and institutions
+  that shape business decisions.
+</p>
       </p>
     </section>
 
