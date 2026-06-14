@@ -110,10 +110,112 @@ function renderGeoCharts() {
 }
   }], { ...chartLayout, title: "GDP bubble size and population color" }, { responsive: true, displayModeBar: false });
 
-  Plotly.newPlot("freedomMap", [{
-    type: "choropleth", locations: countries.map(c => c.iso3), z: countries.map(c => c.freedomScore), text: countries.map(c => `${c.name}: ${c.freedomScore}`), colorscale: "YlGnBu", zmin: 40, zmax: 90, colorbar: { title: "Score" }
-  }], { ...chartLayout, title: "2025 Index of Economic Freedom overall scores" }, { responsive: true, displayModeBar: false });
-}
+  const economicFreedomData = [
+  { country: "Bangladesh", flag: "🇧🇩", worldRank: "122", overallScore: 54.7, propertyRights: 36.5, businessFreedom: 53.9, tradeFreedom: 62.2, financialFreedom: 40, perCapitaGDP: 2551.017727 },
+  { country: "Cameroon", flag: "🇨🇲", worldRank: "134", overallScore: 52.1, propertyRights: 31.3, businessFreedom: 48.8, tradeFreedom: 57.2, financialFreedom: 50, perCapitaGDP: 1736.860911 },
+  { country: "China", flag: "🇨🇳", worldRank: "151", overallScore: 49, propertyRights: 46.7, businessFreedom: 67.7, tradeFreedom: 74, financialFreedom: 20, perCapitaGDP: 12614.06174 },
+  { country: "Cuba", flag: "🇨🇺", worldRank: "175", overallScore: 25.4, propertyRights: 29.9, businessFreedom: 42.3, tradeFreedom: 72.8, financialFreedom: 10, perCapitaGDP: 39693.10979 },
+  { country: "El Salvador", flag: "🇸🇻", worldRank: "106", overallScore: 56.6, propertyRights: 43.2, businessFreedom: 62.7, tradeFreedom: 70.4, financialFreedom: 60, perCapitaGDP: 5391.069262 },
+  { country: "Finland", flag: "🇫🇮", worldRank: "13", overallScore: 77, propertyRights: 100, businessFreedom: 88.3, tradeFreedom: 79.6, financialFreedom: 80, perCapitaGDP: 52925.68976 },
+  { country: "Ireland", flag: "🇮🇪", worldRank: "3", overallScore: 83.1, propertyRights: 94.1, businessFreedom: 88.1, tradeFreedom: 79.6, financialFreedom: 70, perCapitaGDP: 103887.8004 },
+  { country: "Mexico", flag: "🇲🇽", worldRank: "80", overallScore: 61.3, propertyRights: 41.1, businessFreedom: 71.9, tradeFreedom: 72.2, financialFreedom: 60, perCapitaGDP: 13790.02434 },
+  { country: "Nigeria", flag: "🇳🇬", worldRank: "127", overallScore: 53.4, propertyRights: 25.4, businessFreedom: 38.5, tradeFreedom: 67.6, financialFreedom: 40, perCapitaGDP: 1596.636961 },
+  { country: "Thailand", flag: "🇹🇭", worldRank: "84", overallScore: 60.6, propertyRights: 45.1, businessFreedom: 70.9, tradeFreedom: 72.4, financialFreedom: 60, perCapitaGDP: 7182.025258 },
+  { country: "The Philippines", flag: "🇵🇭", worldRank: "82", overallScore: 60.6, propertyRights: 47.4, businessFreedom: 69.1, tradeFreedom: 79.2, financialFreedom: 60, perCapitaGDP: 3804.87258 },
+  { country: "Trinidad and Tobago", flag: "🇹🇹", worldRank: "69", overallScore: 63.6, propertyRights: 58.3, businessFreedom: 72.6, tradeFreedom: 67.6, financialFreedom: 40, perCapitaGDP: 20016.1503 },
+  { country: "Ukraine", flag: "🇺🇦", worldRank: "N/A", overallScore: null, propertyRights: 21.5, businessFreedom: null, tradeFreedom: 73.2, financialFreedom: null, perCapitaGDP: 4737.439348 },
+  { country: "United States", flag: "🇺🇸", worldRank: "26", overallScore: 70.2, propertyRights: 95.4, businessFreedom: 88.5, tradeFreedom: 75.6, financialFreedom: 80, perCapitaGDP: 82769.41221 },
+  { country: "Vietnam", flag: "🇻🇳", worldRank: "61", overallScore: 65.2, propertyRights: 49.9, businessFreedom: 73.9, tradeFreedom: 79.8, financialFreedom: 50, perCapitaGDP: 4282.088517 }
+];
+
+const sortedFreedomData = [...economicFreedomData].sort((a, b) => {
+  return (b.overallScore ?? -1) - (a.overallScore ?? -1);
+});
+
+const freedomSegments = [
+  { key: "propertyRights", label: "Property Rights", color: "#1e4385" },
+  { key: "businessFreedom", label: "Business Freedom", color: "#0d9488" },
+  { key: "tradeFreedom", label: "Trade Freedom", color: "#f97316" },
+  { key: "financialFreedom", label: "Financial Freedom", color: "#8b5cf6" }
+];
+
+const freedomLabels = sortedFreedomData.map(d => `${d.flag} ${d.country}`);
+
+Plotly.newPlot(
+  "freedomMap",
+  freedomSegments.map(segment => ({
+    type: "bar",
+    orientation: "h",
+    name: segment.label,
+    y: freedomLabels,
+    x: sortedFreedomData.map(d => d[segment.key]),
+    text: sortedFreedomData.map(d => d[segment.key] === null ? "" : d[segment.key]),
+    texttemplate: "%{text}",
+    textposition: "inside",
+    insidetextanchor: "middle",
+    customdata: sortedFreedomData.map(d => [
+      d.overallScore === null ? "N/A" : d.overallScore,
+      d.worldRank,
+      `$${Math.round(d.perCapitaGDP).toLocaleString()}`
+    ]),
+    hovertemplate:
+      "<b>%{y}</b><br>" +
+      segment.label + ": %{x}<br>" +
+      "Overall Score: %{customdata[0]}<br>" +
+      "World Rank: %{customdata[1]}<br>" +
+      "Per Capita GDP: %{customdata[2]}" +
+      "<extra></extra>",
+    marker: {
+      color: segment.color,
+      line: {
+        color: "rgba(255,255,255,0.85)",
+        width: 1
+      }
+    }
+  })),
+  {
+    title: "Index of Economic Freedom Components, 2025",
+    barmode: "stack",
+    paper_bgcolor: "rgba(0,0,0,0)",
+    plot_bgcolor: "rgba(0,0,0,0)",
+    margin: { t: 68, r: 36, b: 92, l: 185 },
+    font: {
+      family: "Inter, Arial, sans-serif",
+      color: "#1e2a3a"
+    },
+    xaxis: {
+      title: "Component score total",
+      range: [0, 400],
+      gridcolor: "rgba(30,42,58,0.12)",
+      zeroline: false
+    },
+    yaxis: {
+      autorange: "reversed",
+      tickfont: {
+        size: 12
+      }
+    },
+    legend: {
+      orientation: "h",
+      x: 0,
+      y: -0.18,
+      font: {
+        size: 12
+      }
+    },
+    hoverlabel: {
+      bgcolor: "#1e2a3a",
+      bordercolor: "rgba(255,255,255,0.25)",
+      font: {
+        color: "#ffffff"
+      }
+    }
+  },
+  {
+    responsive: true,
+    displayModeBar: false
+  }
+);
 
 function renderComponentCharts() {
   const grid = document.querySelector("#componentCharts");
