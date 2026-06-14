@@ -13,21 +13,21 @@ const chartLayout = {
   paper_bgcolor: "rgba(0,0,0,0)",
   plot_bgcolor: "rgba(0,0,0,0)",
   margin: { t: 54, r: 12, b: 12, l: 12 },
+
   font: {
     family: "Inter, Arial, sans-serif",
     color: "#f4f7fb"
   },
+
   title: {
     font: {
       color: "#f4f7fb",
       size: 18
     }
   },
+
   geo: {
     projection: {
-  type: "natural earth",
-  scale: 1
-}
       type: "orthographic",
       rotation: {
         lon: -20,
@@ -36,6 +36,7 @@ const chartLayout = {
       },
       scale: 0.86
     },
+
     bgcolor: "rgba(0,0,0,0)",
     showframe: false,
 
@@ -61,6 +62,7 @@ const chartLayout = {
       gridcolor: "rgba(255,255,255,0.12)",
       gridwidth: 0.7
     },
+
     lataxis: {
       showgrid: true,
       gridcolor: "rgba(255,255,255,0.12)",
