@@ -45,16 +45,16 @@ const iso3ToIso2 = {
   VNM: "vn"
 };
 
-function flagImages(data) {
+function flagImages(data, xPosition, xSize) {
   return data.map(country => ({
     source: `https://flagcdn.com/w40/${iso3ToIso2[country.iso3]}.png`,
-    xref: "paper",
+    xref: "x",
     yref: "y",
-    x: -0.035,
+    x: xPosition,
     y: country.country,
-    sizex: 0.03,
-    sizey: 0.55,
-    xanchor: "right",
+    sizex: xSize,
+    sizey: 0.42,
+    xanchor: "center",
     yanchor: "middle",
     layer: "above"
   }));
@@ -245,13 +245,13 @@ function renderOverallScoreBar(data) {
     ],
     {
       title: "Overall Score",
-      images: flagImages(rankedByScore),
+      images: flagImages(rankedByScore, -7, 5),
       paper_bgcolor: "rgba(0,0,0,0)",
       plot_bgcolor: "rgba(0,0,0,0)",
-      margin: { t: 58, r: 24, b: 48, l: 205 },
+      margin: { t: 58, r: 24, b: 48, l: 175 },
       font: { family: "Inter, Arial, sans-serif", color: "#1e2a3a" },
       xaxis: {
-        range: [0, 100],
+        range: [-15, 100],
         gridcolor: "rgba(30,42,58,0.12)",
         zeroline: false
       },
@@ -298,12 +298,13 @@ function renderWorldRankBar() {
     ],
     {
       title: "World Rank Strength",
-      images: flagImages(rankedByWorldRank),
+      images: flagImages(rankedByWorldRank, -12, 9),
       paper_bgcolor: "rgba(0,0,0,0)",
       plot_bgcolor: "rgba(0,0,0,0)",
-      margin: { t: 58, r: 24, b: 48, l: 205 },
+      margin: { t: 58, r: 24, b: 48, l: 175 },
       font: { family: "Inter, Arial, sans-serif", color: "#1e2a3a" },
       xaxis: {
+        range: [-25, 185],
         title: "Lower rank = stronger",
         gridcolor: "rgba(30,42,58,0.12)",
         zeroline: false
@@ -323,6 +324,7 @@ function renderGDPPerCapitaBar() {
   if (!chart) return;
 
   const rankedByGDP = [...economicFreedomData].sort((a, b) => b.perCapitaGDP - a.perCapitaGDP);
+  const maxGDP = Math.max(...rankedByGDP.map(country => country.perCapitaGDP));
 
   Plotly.newPlot(
     "gdpPerCapitaBar",
@@ -343,12 +345,13 @@ function renderGDPPerCapitaBar() {
     ],
     {
       title: "GDP Per Capita",
-      images: flagImages(rankedByGDP),
+      images: flagImages(rankedByGDP, -maxGDP * 0.08, maxGDP * 0.055),
       paper_bgcolor: "rgba(0,0,0,0)",
       plot_bgcolor: "rgba(0,0,0,0)",
-      margin: { t: 58, r: 24, b: 48, l: 205 },
+      margin: { t: 58, r: 24, b: 48, l: 175 },
       font: { family: "Inter, Arial, sans-serif", color: "#1e2a3a" },
       xaxis: {
+        range: [-maxGDP * 0.16, maxGDP * 1.08],
         tickprefix: "$",
         gridcolor: "rgba(30,42,58,0.12)",
         zeroline: false
