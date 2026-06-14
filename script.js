@@ -249,7 +249,7 @@ function renderOverallScoreBar(data) {
       paper_bgcolor: "rgba(0,0,0,0)",
       plot_bgcolor: "rgba(0,0,0,0)",
       margin: { t: 58, r: 24, b: 48, l: 175 },
-      font: { family: "Inter, Arial, sans-serif", color: "#1e2a3a" },
+      font: { family: "Inter, Arial, sans-serif", color: "#ffffff" },
       xaxis: {
         range: [-15, 100],
         gridcolor: "rgba(30,42,58,0.12)",
@@ -257,7 +257,7 @@ function renderOverallScoreBar(data) {
       },
       yaxis: {
         autorange: "reversed",
-        tickfont: { size: 12 },
+        tickfont: { size: 12,  color: "#ffffff" },
         automargin: true
       }
     },
@@ -302,7 +302,7 @@ function renderWorldRankBar() {
       paper_bgcolor: "rgba(0,0,0,0)",
       plot_bgcolor: "rgba(0,0,0,0)",
       margin: { t: 58, r: 24, b: 48, l: 175 },
-      font: { family: "Inter, Arial, sans-serif", color: "#1e2a3a" },
+      font: { family: "Inter, Arial, sans-serif", color: "#ffffff" },
       xaxis: {
         range: [-25, 185],
         title: "Lower rank = stronger",
@@ -311,7 +311,7 @@ function renderWorldRankBar() {
       },
       yaxis: {
         autorange: "reversed",
-        tickfont: { size: 12 },
+        tickfont: { size: 12,  color: "#ffffff" },
         automargin: true
       }
     },
@@ -349,7 +349,7 @@ function renderGDPPerCapitaBar() {
       paper_bgcolor: "rgba(0,0,0,0)",
       plot_bgcolor: "rgba(0,0,0,0)",
       margin: { t: 58, r: 24, b: 48, l: 175 },
-      font: { family: "Inter, Arial, sans-serif", color: "#1e2a3a" },
+      font: { family: "Inter, Arial, sans-serif", color: "#ffffff" },
       xaxis: {
         range: [-maxGDP * 0.16, maxGDP * 1.08],
         tickprefix: "$",
@@ -358,7 +358,7 @@ function renderGDPPerCapitaBar() {
       },
       yaxis: {
         autorange: "reversed",
-        tickfont: { size: 12 },
+        tickfont: { size: 12,  color: "#ffffff" },
         automargin: true
       }
     },
@@ -422,7 +422,7 @@ function renderComponentCharts() {
       margin: { t: 68, r: 36, b: 92, l: 190 },
       font: {
         family: "Inter, Arial, sans-serif",
-        color: "#1e2a3a"
+        color: "#ffffff"
       },
       xaxis: {
         title: "Combined component score",
@@ -432,13 +432,13 @@ function renderComponentCharts() {
       },
       yaxis: {
         autorange: "reversed",
-        tickfont: { size: 12 }
+        tickfont: { size: 12,  color: "#ffffff" }
       },
       legend: {
         orientation: "h",
         x: 0,
         y: -0.18,
-        font: { size: 12 }
+        font: { size: 12,  color: "#ffffff" }
       },
       hoverlabel: {
         bgcolor: "#1e2a3a",
