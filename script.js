@@ -132,6 +132,85 @@ const sortedFreedomData = [...economicFreedomData].sort((a, b) => {
   return (b.overallScore ?? -1) - (a.overallScore ?? -1);
 });
 
+  const usableFreedomData = economicFreedomData.filter(d => d.overallScore !== null);
+
+function createSunburstChart(chartId, title, rootLabel, valueKey, valueLabel, formatter) {
+  Plotly.newPlot(
+    chartId,
+    [
+      {
+        type: "sunburst",
+        labels: [
+          rootLabel,
+          ...usableFreedomData.map(d => `${d.flag} ${d.country}`)
+        ],
+        parents: [
+          "",
+          ...usableFreedomData.map(() => rootLabel)
+        ],
+        values: [
+          usableFreedomData.reduce((sum, d) => sum + d[valueKey], 0),
+          ...usableFreedomData.map(d => d[valueKey])
+        ],
+        branchvalues: "total",
+        customdata: [
+          "",
+          ...usableFreedomData.map(d => formatter(d))
+        ],
+        hovertemplate:
+          "<b>%{label}</b><br>" +
+          valueLabel + ": %{customdata}" +
+          "<extra></extra>",
+        insidetextorientation: "radial",
+        marker: {
+          line: {
+            color: "rgba(255,255,255,0.85)",
+            width: 1
+          }
+        }
+      }
+    ],
+    {
+      title,
+      paper_bgcolor: "rgba(0,0,0,0)",
+      plot_bgcolor: "rgba(0,0,0,0)",
+      margin: { t: 58, r: 8, b: 8, l: 8 },
+      font: {
+        family: "Inter, Arial, sans-serif",
+        color: "#1e2a3a"
+      },
+      hoverlabel: {
+        bgcolor: "#1e2a3a",
+        bordercolor: "rgba(255,255,255,0.25)",
+        font: {
+          color: "#ffffff"
+        }
+      }
+    },
+    {
+      responsive: true,
+      displayModeBar: false
+    }
+  );
+}
+
+createSunburstChart(
+  "overallScoreSunburst",
+  "Overall Economic Freedom Score",
+  "Overall Score",
+  "overallScore",
+  "Score",
+  d => d.overallScore
+);
+
+createSunburstChart(
+  "gdpSunburst",
+  "GDP Per Capita",
+  "GDP Per Capita",
+  "perCapitaGDP",
+  "GDP Per Capita",
+  d => `$${Math.round(d.perCapitaGDP).toLocaleString()}`
+);
 const freedomSegments = [
   { key: "propertyRights", label: "Property Rights", color: "#1e4385" },
   { key: "businessFreedom", label: "Business Freedom", color: "#0d9488" },
