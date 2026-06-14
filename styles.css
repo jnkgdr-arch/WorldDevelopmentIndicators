@@ -888,3 +888,38 @@ main {
     display: none;
   }
 }
+/* Mobile-only adjustment for the stacked bar chart */
+@media (max-width: 768px) {
+  #components .chart-wrap {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 12px;
+  }
+
+  #componentCharts {
+    min-width: 920px;
+    min-height: 780px;
+  }
+
+  #components .chart-wrap::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  #components .chart-wrap::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+  }
+
+  #components .chart-wrap::-webkit-scrollbar-thumb {
+    background: rgba(249, 115, 22, 0.55);
+    border-radius: 999px;
+  }
+}
+
+@media (max-width: 480px) {
+  #componentCharts {
+    min-width: 960px;
+    min-height: 800px;
+  }
+}
