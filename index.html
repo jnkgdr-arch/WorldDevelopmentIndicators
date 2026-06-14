@@ -8,55 +8,6 @@
 
   <link rel="preconnect" href="https://cdn.plot.ly" />
   <link rel="stylesheet" href="styles.css" />
-
-  <style>
-    .chart-wrap.map-tile {
-      position: relative;
-      isolation: isolate;
-      overflow: hidden;
-      border-radius: 28px;
-      background:
-        radial-gradient(circle at 28% 18%, rgba(113, 224, 255, 0.24), transparent 34%),
-        radial-gradient(circle at 78% 72%, rgba(255, 209, 102, 0.18), transparent 32%),
-        linear-gradient(145deg, rgba(8, 22, 39, 0.98), rgba(18, 35, 58, 0.94));
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      box-shadow:
-        0 34px 90px rgba(0, 0, 0, 0.48),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2),
-        inset 0 -28px 60px rgba(0, 0, 0, 0.28);
-    }
-
-    .chart-wrap.map-tile .chart {
-      position: relative;
-      z-index: 1;
-      filter: drop-shadow(0 24px 32px rgba(0, 0, 0, 0.32));
-    }
-
-    #freedomMap {
-      min-height: 720px;
-    }
-
-    .sunburst-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 22px;
-      margin-top: 24px;
-    }
-
-    .sunburst-grid .chart-wrap {
-      min-height: 430px;
-    }
-
-    .sunburst-grid .chart {
-      min-height: 405px;
-    }
-
-    @media (max-width: 980px) {
-      .sunburst-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
 </head>
 
 <body>
@@ -66,7 +17,7 @@
 
       <div class="nav-links">
         <a href="#gdp-capita">GDP per capita</a>
-        <a href="#bubble">GDP & population</a>
+        <a href="#gdp-population">GDP & population</a>
         <a href="#freedom">Economic freedom</a>
         <a href="#components">Components</a>
         <a href="#references">References</a>
@@ -124,18 +75,18 @@
       </p>
     </section>
 
-    <section id="bubble" class="viz-section reveal">
+    <section id="gdp-population" class="viz-section reveal">
       <div class="section-copy">
         <p class="eyebrow">Geographic heat map</p>
-<h2>GDP heat intensity shows national economic scale.</h2>
-<p>
-  The heat map compares GDP across selected countries, while hover labels provide
-  population and GDP per capita context for each economy.
-</p>
+        <h2>GDP heat intensity shows national economic scale.</h2>
+        <p>
+          The heat map compares GDP across selected countries, while hover labels provide
+          population and GDP per capita context for each economy.
+        </p>
       </div>
 
       <div class="chart-wrap map-tile">
-        <div id="gdpPopulationBubble" class="chart"></div>
+        <div id="gdpPopulationHeatMap" class="chart"></div>
       </div>
 
       <p class="caption">
@@ -146,61 +97,48 @@
     <section id="freedom" class="viz-section reveal">
       <div class="section-copy">
         <p class="eyebrow">Index of Economic Freedom</p>
-        <h2>Economic freedom components reveal each country’s institutional profile.</h2>
+        <h2>Overall score, world rank, and GDP per capita compare economic outcomes.</h2>
         <p>
-          The stacked bar chart compares property rights, business freedom, trade freedom,
-          and financial freedom across selected countries for the 2025 index year. The
-          sunburst charts below summarize overall score, world rank strength, and GDP per capita.
+          These bar charts compare each country’s overall economic freedom score, world rank
+          strength, and GDP per capita. This keeps the comparison clear without using sunburst charts.
         </p>
       </div>
 
-      <div class="chart-wrap">
-        <div id="freedomMap" class="chart"></div>
+      <div class="bar-chart-grid">
+        <div class="chart-wrap">
+          <div id="overallScoreBar" class="chart"></div>
+        </div>
+
+        <div class="chart-wrap">
+          <div id="worldRankBar" class="chart"></div>
+        </div>
+
+        <div class="chart-wrap">
+          <div id="gdpPerCapitaBar" class="chart"></div>
+        </div>
       </div>
 
-      <div class="bar-chart-grid">
-  <div class="chart-wrap">
-    <div id="overallScoreBar" class="chart"></div>
-  </div>
-
-  <div class="chart-wrap">
-    <div id="worldRankBar" class="chart"></div>
-  </div>
-
-  <div class="chart-wrap">
-    <div id="gdpPerCapitaBar" class="chart"></div>
-  </div>
-</div>
-
       <p class="caption">
-        The stacked bar chart compares property rights, business freedom, trade freedom,
-and financial freedom across selected countries for the 2025 index year. The
-bar charts below summarize overall score, world rank strength, and GDP per capita.
+        Caption: Overall scores, world rank, and GDP per capita are based on the 2025 Index of Economic Freedom dataset provided.
       </p>
     </section>
 
     <section id="components" class="viz-section reveal">
       <div class="section-copy">
-        <p class="eyebrow">Country component bars</p>
-        <h2>Economic freedom components vary within each country.</h2>
+        <p class="eyebrow">Economic freedom components</p>
+        <h2>Economic freedom components vary across countries.</h2>
         <p>
-          Individual bars compare property rights, business freedom, trade freedom, and
-          financial freedom. These components help separate broad national performance from
-          the specific rules and institutions that shape business decisions.
+          A stacked bar chart compares property rights, business freedom, trade freedom,
+          and financial freedom across all countries in one view.
         </p>
       </div>
 
       <div class="chart-wrap">
-  <div id="componentCharts" class="chart"></div>
-</div>
+        <div id="componentCharts" class="chart"></div>
+      </div>
 
       <p class="caption">
-        <p>
-  A stacked bar chart compares property rights, business freedom, trade freedom,
-  and financial freedom across all countries in one view. These components help
-  separate broad national performance from the specific rules and institutions
-  that shape business decisions.
-</p>
+        Caption: Component bars reference the Index of Economic Freedom categories listed in the supplied dataset.
       </p>
     </section>
 
@@ -222,529 +160,6 @@ bar charts below summarize overall score, world rank strength, and GDP per capit
   <button class="to-top" aria-label="Back to top">↑</button>
 
   <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
-
-  <script>
-    const macroCountries = [
-      { name: "Ireland", iso3: "IRL", flag: "🇮🇪", gdp: 545.6, population: 5.3, gdpPerCapita: 102900 },
-      { name: "Finland", iso3: "FIN", flag: "🇫🇮", gdp: 300.2, population: 5.6, gdpPerCapita: 53600 },
-      { name: "United States", iso3: "USA", flag: "🇺🇸", gdp: 27360.9, population: 334.9, gdpPerCapita: 81700 },
-      { name: "China", iso3: "CHN", flag: "🇨🇳", gdp: 17794.8, population: 1410.7, gdpPerCapita: 12614 },
-      { name: "Nigeria", iso3: "NGA", flag: "🇳🇬", gdp: 362.8, population: 223.8, gdpPerCapita: 1621 },
-      { name: "Bangladesh", iso3: "BGD", flag: "🇧🇩", gdp: 437.4, population: 172.9, gdpPerCapita: 2530 },
-      { name: "Brazil", iso3: "BRA", flag: "🇧🇷", gdp: 2173.7, population: 216.4, gdpPerCapita: 10045 },
-      { name: "India", iso3: "IND", flag: "🇮🇳", gdp: 3549.9, population: 1428.6, gdpPerCapita: 2485 }
-    ];
-
-    const economicFreedomData = [
-      { country: "Bangladesh", iso3: "BGD", flag: "🇧🇩", worldRank: "122", overallScore: 54.7, propertyRights: 36.5, businessFreedom: 53.9, tradeFreedom: 62.2, financialFreedom: 40, perCapitaGDP: 2551.017727 },
-      { country: "Cameroon", iso3: "CMR", flag: "🇨🇲", worldRank: "134", overallScore: 52.1, propertyRights: 31.3, businessFreedom: 48.8, tradeFreedom: 57.2, financialFreedom: 50, perCapitaGDP: 1736.860911 },
-      { country: "China", iso3: "CHN", flag: "🇨🇳", worldRank: "151", overallScore: 49, propertyRights: 46.7, businessFreedom: 67.7, tradeFreedom: 74, financialFreedom: 20, perCapitaGDP: 12614.06174 },
-      { country: "Cuba", iso3: "CUB", flag: "🇨🇺", worldRank: "175", overallScore: 25.4, propertyRights: 29.9, businessFreedom: 42.3, tradeFreedom: 72.8, financialFreedom: 10, perCapitaGDP: 39693.10979 },
-      { country: "El Salvador", iso3: "SLV", flag: "🇸🇻", worldRank: "106", overallScore: 56.6, propertyRights: 43.2, businessFreedom: 62.7, tradeFreedom: 70.4, financialFreedom: 60, perCapitaGDP: 5391.069262 },
-      { country: "Finland", iso3: "FIN", flag: "🇫🇮", worldRank: "13", overallScore: 77, propertyRights: 100, businessFreedom: 88.3, tradeFreedom: 79.6, financialFreedom: 80, perCapitaGDP: 52925.68976 },
-      { country: "Ireland", iso3: "IRL", flag: "🇮🇪", worldRank: "3", overallScore: 83.1, propertyRights: 94.1, businessFreedom: 88.1, tradeFreedom: 79.6, financialFreedom: 70, perCapitaGDP: 103887.8004 },
-      { country: "Mexico", iso3: "MEX", flag: "🇲🇽", worldRank: "80", overallScore: 61.3, propertyRights: 41.1, businessFreedom: 71.9, tradeFreedom: 72.2, financialFreedom: 60, perCapitaGDP: 13790.02434 },
-      { country: "Nigeria", iso3: "NGA", flag: "🇳🇬", worldRank: "127", overallScore: 53.4, propertyRights: 25.4, businessFreedom: 38.5, tradeFreedom: 67.6, financialFreedom: 40, perCapitaGDP: 1596.636961 },
-      { country: "Thailand", iso3: "THA", flag: "🇹🇭", worldRank: "84", overallScore: 60.6, propertyRights: 45.1, businessFreedom: 70.9, tradeFreedom: 72.4, financialFreedom: 60, perCapitaGDP: 7182.025258 },
-      { country: "The Philippines", iso3: "PHL", flag: "🇵🇭", worldRank: "82", overallScore: 60.6, propertyRights: 47.4, businessFreedom: 69.1, tradeFreedom: 79.2, financialFreedom: 60, perCapitaGDP: 3804.87258 },
-      { country: "Trinidad and Tobago", iso3: "TTO", flag: "🇹🇹", worldRank: "69", overallScore: 63.6, propertyRights: 58.3, businessFreedom: 72.6, tradeFreedom: 67.6, financialFreedom: 40, perCapitaGDP: 20016.1503 },
-      { country: "Ukraine", iso3: "UKR", flag: "🇺🇦", worldRank: "N/A", overallScore: null, propertyRights: 21.5, businessFreedom: null, tradeFreedom: 73.2, financialFreedom: null, perCapitaGDP: 4737.439348 },
-      { country: "United States", iso3: "USA", flag: "🇺🇸", worldRank: "26", overallScore: 70.2, propertyRights: 95.4, businessFreedom: 88.5, tradeFreedom: 75.6, financialFreedom: 80, perCapitaGDP: 82769.41221 },
-      { country: "Vietnam", iso3: "VNM", flag: "🇻🇳", worldRank: "61", overallScore: 65.2, propertyRights: 49.9, businessFreedom: 73.9, tradeFreedom: 79.8, financialFreedom: 50, perCapitaGDP: 4282.088517 }
-    ];
-
-    const chartLayout = {
-      paper_bgcolor: "rgba(0,0,0,0)",
-      plot_bgcolor: "rgba(0,0,0,0)",
-      margin: { t: 54, r: 12, b: 12, l: 12 },
-      font: {
-        family: "Inter, Arial, sans-serif",
-        color: "#f4f7fb"
-      },
-      title: {
-        font: {
-          color: "#f4f7fb",
-          size: 18
-        }
-      },
-      geo: {
-        projection: {
-          type: "natural earth",
-          scale: 1
-        },
-        bgcolor: "rgba(0,0,0,0)",
-        showframe: false,
-        showland: true,
-        landcolor: "rgba(235, 244, 255, 0.92)",
-        showocean: true,
-        oceancolor: "rgba(7, 17, 31, 0.55)",
-        showlakes: true,
-        lakecolor: "rgba(113, 224, 255, 0.16)",
-        showcoastlines: true,
-        coastlinecolor: "rgba(255,255,255,0.7)",
-        coastlinewidth: 1.2,
-        showcountries: true,
-        countrycolor: "rgba(15, 35, 58, 0.65)",
-        countrywidth: 0.8,
-        lonaxis: {
-          showgrid: true,
-          gridcolor: "rgba(255,255,255,0.12)",
-          gridwidth: 0.7
-        },
-        lataxis: {
-          showgrid: true,
-          gridcolor: "rgba(255,255,255,0.12)",
-          gridwidth: 0.7
-        }
-      }
-    };
-
-    function renderTopCountries() {
-      const container = document.querySelector("#topCountries");
-      if (!container) return;
-
-      const topThree = economicFreedomData
-        .filter(country => country.overallScore !== null)
-        .sort((a, b) => b.overallScore - a.overallScore)
-        .slice(0, 3);
-
-      container.innerHTML = "";
-
-      topThree.forEach((country, index) => {
-        container.insertAdjacentHTML("beforeend", `
-          <article class="country-card">
-            <span class="flag" aria-hidden="true">${country.flag}</span>
-            <div>
-              <strong>#${index + 1} ${country.country}</strong><br>
-              <small>World rank ${country.worldRank}</small>
-            </div>
-            <span class="score">${country.overallScore}</span>
-          </article>
-        `);
-      });
-    }
-
-    function renderGeoCharts() {
-      Plotly.newPlot(
-        "gdpPerCapitaMap",
-        [
-          {
-            type: "choropleth",
-            locations: economicFreedomData.map(country => country.iso3),
-            z: economicFreedomData.map(country => country.perCapitaGDP),
-            text: economicFreedomData.map(country => `${country.flag} ${country.country}: $${Math.round(country.perCapitaGDP).toLocaleString()}`),
-            colorscale: "Viridis",
-            colorbar: {
-              title: "GDP per capita",
-              tickprefix: "$",
-              tickfont: { color: "#f4f7fb" },
-              titlefont: { color: "#f4f7fb" }
-            },
-            hovertemplate: "%{text}<extra></extra>"
-          }
-        ],
-        {
-          ...chartLayout,
-          title: "GDP per capita across selected countries"
-        },
-        {
-          responsive: true,
-          displayModeBar: false
-        }
-      );
-
-      Plotly.newPlot(
-        "gdpPopulationBubble",
-        [
-          {
-            type: "scattergeo",
-            mode: "markers+text",
-            locations: macroCountries.map(country => country.iso3),
-            text: macroCountries.map(country => country.name),
-            hovertext: macroCountries.map(country =>
-              `${country.flag} ${country.name}<br>` +
-              `GDP: $${country.gdp.toLocaleString()}B<br>` +
-              `Population: ${country.population.toLocaleString()}M<br>` +
-              `GDP per capita: $${country.gdpPerCapita.toLocaleString()}`
-            ),
-            hovertemplate: "%{hovertext}<extra></extra>",
-            marker: {
-              size: macroCountries.map(country => Math.sqrt(country.gdp) * 2.2),
-              color: macroCountries.map(country => country.population),
-              colorscale: "Portland",
-              opacity: 0.86,
-              line: {
-                color: "rgba(255,255,255,0.95)",
-                width: 1.8
-              },
-              colorbar: {
-                title: "Population (M)",
-                bgcolor: "rgba(7,17,31,0.72)",
-                bordercolor: "rgba(255,255,255,0.22)",
-                borderwidth: 1,
-                tickfont: { color: "#f4f7fb" },
-                titlefont: { color: "#f4f7fb" }
-              }
-            }
-          }
-        ],
-        {
-          ...chartLayout,
-          title: "GDP bubble size and population color"
-        },
-        {
-          responsive: true,
-          displayModeBar: false
-        }
-      );
-    }
-
-    function renderEconomicFreedomCharts() {
-      const sortedFreedomData = [...economicFreedomData].sort((a, b) => {
-        return (b.overallScore ?? -1) - (a.overallScore ?? -1);
-      });
-
-      const usableFreedomData = economicFreedomData.filter(country => country.overallScore !== null);
-
-      const freedomSegments = [
-        { key: "propertyRights", label: "Property Rights", color: "#1e4385" },
-        { key: "businessFreedom", label: "Business Freedom", color: "#0d9488" },
-        { key: "tradeFreedom", label: "Trade Freedom", color: "#f97316" },
-        { key: "financialFreedom", label: "Financial Freedom", color: "#8b5cf6" }
-      ];
-
-      const freedomLabels = sortedFreedomData.map(country => `${country.flag} ${country.country}`);
-
-      Plotly.newPlot(
-        "freedomMap",
-        freedomSegments.map(segment => ({
-          type: "bar",
-          orientation: "h",
-          name: segment.label,
-          y: freedomLabels,
-          x: sortedFreedomData.map(country => country[segment.key]),
-          text: sortedFreedomData.map(country => country[segment.key] === null ? "" : country[segment.key]),
-          texttemplate: "%{text}",
-          textposition: "inside",
-          insidetextanchor: "middle",
-          customdata: sortedFreedomData.map(country => [
-            country.overallScore === null ? "N/A" : country.overallScore,
-            country.worldRank,
-            `$${Math.round(country.perCapitaGDP).toLocaleString()}`
-          ]),
-          hovertemplate:
-            "<b>%{y}</b><br>" +
-            segment.label + ": %{x}<br>" +
-            "Overall Score: %{customdata[0]}<br>" +
-            "World Rank: %{customdata[1]}<br>" +
-            "Per Capita GDP: %{customdata[2]}" +
-            "<extra></extra>",
-          marker: {
-            color: segment.color,
-            line: {
-              color: "rgba(255,255,255,0.85)",
-              width: 1
-            }
-          }
-        })),
-        {
-          title: "Index of Economic Freedom Components, 2025",
-          barmode: "stack",
-          paper_bgcolor: "rgba(0,0,0,0)",
-          plot_bgcolor: "rgba(0,0,0,0)",
-          margin: { t: 68, r: 36, b: 92, l: 190 },
-          font: {
-            family: "Inter, Arial, sans-serif",
-            color: "#1e2a3a"
-          },
-          xaxis: {
-            title: "Component score total",
-            range: [0, 400],
-            gridcolor: "rgba(30,42,58,0.12)",
-            zeroline: false
-          },
-          yaxis: {
-            autorange: "reversed",
-            tickfont: {
-              size: 12
-            }
-          },
-          legend: {
-            orientation: "h",
-            x: 0,
-            y: -0.18,
-            font: {
-              size: 12
-            }
-          },
-          hoverlabel: {
-            bgcolor: "#1e2a3a",
-            bordercolor: "rgba(255,255,255,0.25)",
-            font: {
-              color: "#ffffff"
-            }
-          }
-        },
-        {
-          responsive: true,
-          displayModeBar: false
-        }
-      );
-
-      createSunburstChart(
-        "overallScoreSunburst",
-        "Overall Economic Freedom Score",
-        "Overall Score",
-        usableFreedomData,
-        "overallScore",
-        "Score",
-        country => country.overallScore
-      );
-
-      createSunburstChart(
-        "gdpSunburst",
-        "GDP Per Capita",
-        "GDP Per Capita",
-        usableFreedomData,
-        "perCapitaGDP",
-        "GDP Per Capita",
-        country => `$${Math.round(country.perCapitaGDP).toLocaleString()}`
-      );
-
-      renderWorldRankSunburst();
-    }
-
-    function createSunburstChart(chartId, title, rootLabel, data, valueKey, valueLabel, formatter) {
-      if (!document.getElementById(chartId)) return;
-
-      Plotly.newPlot(
-        chartId,
-        [
-          {
-            type: "sunburst",
-            labels: [
-              rootLabel,
-              ...data.map(country => `${country.flag} ${country.country}`)
-            ],
-            parents: [
-              "",
-              ...data.map(() => rootLabel)
-            ],
-            values: [
-              data.reduce((sum, country) => sum + country[valueKey], 0),
-              ...data.map(country => country[valueKey])
-            ],
-            branchvalues: "total",
-            customdata: [
-              "",
-              ...data.map(country => formatter(country))
-            ],
-            hovertemplate:
-              "<b>%{label}</b><br>" +
-              valueLabel + ": %{customdata}" +
-              "<extra></extra>",
-            insidetextorientation: "radial",
-            marker: {
-              line: {
-                color: "rgba(255,255,255,0.85)",
-                width: 1
-              }
-            }
-          }
-        ],
-        {
-          title,
-          paper_bgcolor: "rgba(0,0,0,0)",
-          plot_bgcolor: "rgba(0,0,0,0)",
-          margin: { t: 58, r: 8, b: 8, l: 8 },
-          font: {
-            family: "Inter, Arial, sans-serif",
-            color: "#1e2a3a"
-          },
-          hoverlabel: {
-            bgcolor: "#1e2a3a",
-            bordercolor: "rgba(255,255,255,0.25)",
-            font: {
-              color: "#ffffff"
-            }
-          }
-        },
-        {
-          responsive: true,
-          displayModeBar: false
-        }
-      );
-    }
-
-    function renderWorldRankSunburst() {
-      if (!document.getElementById("worldRankSunburst")) return;
-
-      const rankedFreedomData = economicFreedomData
-        .filter(country => country.worldRank !== "N/A")
-        .map(country => ({
-          ...country,
-          rankStrength: 176 - Number(country.worldRank)
-        }));
-
-      Plotly.newPlot(
-        "worldRankSunburst",
-        [
-          {
-            type: "sunburst",
-            labels: [
-              "World Rank Strength",
-              ...rankedFreedomData.map(country => `${country.flag} ${country.country}`)
-            ],
-            parents: [
-              "",
-              ...rankedFreedomData.map(() => "World Rank Strength")
-            ],
-            values: [
-              rankedFreedomData.reduce((sum, country) => sum + country.rankStrength, 0),
-              ...rankedFreedomData.map(country => country.rankStrength)
-            ],
-            branchvalues: "total",
-            customdata: [
-              "",
-              ...rankedFreedomData.map(country => `#${country.worldRank}`)
-            ],
-            hovertemplate:
-              "<b>%{label}</b><br>" +
-              "World Rank: %{customdata}" +
-              "<extra></extra>",
-            insidetextorientation: "radial",
-            marker: {
-              line: {
-                color: "rgba(255,255,255,0.85)",
-                width: 1
-              }
-            }
-          }
-        ],
-        {
-          title: "World Rank Strength",
-          paper_bgcolor: "rgba(0,0,0,0)",
-          plot_bgcolor: "rgba(0,0,0,0)",
-          margin: { t: 58, r: 8, b: 8, l: 8 },
-          font: {
-            family: "Inter, Arial, sans-serif",
-            color: "#1e2a3a"
-          },
-          hoverlabel: {
-            bgcolor: "#1e2a3a",
-            bordercolor: "rgba(255,255,255,0.25)",
-            font: {
-              color: "#ffffff"
-            }
-          }
-        },
-        {
-          responsive: true,
-          displayModeBar: false
-        }
-      );
-    }
-
-    function renderComponentCharts() {
-      const grid = document.querySelector("#componentCharts");
-      if (!grid) return;
-
-      grid.innerHTML = "";
-
-      economicFreedomData.forEach((country, index) => {
-        const id = `component-${index}`;
-
-        grid.insertAdjacentHTML(
-          "beforeend",
-          `<article class="component-card"><div id="${id}" class="chart"></div></article>`
-        );
-
-        Plotly.newPlot(
-          id,
-          [
-            {
-              type: "bar",
-              orientation: "h",
-              x: [
-                country.propertyRights ?? 0,
-                country.businessFreedom ?? 0,
-                country.tradeFreedom ?? 0,
-                country.financialFreedom ?? 0
-              ],
-              y: [
-                "Property rights",
-                "Business freedom",
-                "Trade freedom",
-                "Financial freedom"
-              ],
-              text: [
-                country.propertyRights,
-                country.businessFreedom,
-                country.tradeFreedom,
-                country.financialFreedom
-              ].map(value => value === null ? "N/A" : value),
-              texttemplate: "%{text}",
-              textposition: "auto",
-              hovertemplate: "%{y}: %{text}<extra></extra>",
-              marker: {
-                color: ["#1e4385", "#0d9488", "#f97316", "#8b5cf6"]
-              }
-            }
-          ],
-          {
-            title: `${country.flag} ${country.country}`,
-            margin: { t: 46, r: 20, b: 32, l: 118 },
-            xaxis: {
-              range: [0, 100]
-            },
-            paper_bgcolor: "rgba(255,255,255,0)",
-            plot_bgcolor: "rgba(255,255,255,0)",
-            font: {
-              family: "Inter, Arial, sans-serif",
-              color: "#122033"
-            }
-          },
-          {
-            responsive: true,
-            displayModeBar: false
-          }
-        );
-      });
-    }
-
-    function setupAnimations() {
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) entry.target.classList.add("is-visible");
-        });
-      }, { threshold: 0.14 });
-
-      document.querySelectorAll(".fade-in, .reveal").forEach(element => observer.observe(element));
-
-      requestAnimationFrame(() => {
-        document.querySelectorAll(".fade-in").forEach(element => element.classList.add("is-visible"));
-      });
-
-      const topButton = document.querySelector(".to-top");
-
-      if (topButton) {
-        window.addEventListener("scroll", () => {
-          topButton.classList.toggle("show", window.scrollY > 700);
-        });
-
-        topButton.addEventListener("click", () => {
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        });
-      }
-    }
-
-    window.addEventListener("DOMContentLoaded", () => {
-      renderTopCountries();
-      renderGeoCharts();
-      renderEconomicFreedomCharts();
-      renderComponentCharts();
-      setupAnimations();
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
