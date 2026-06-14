@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>World Development Indicators: GDP, Population & Index of Economic Freedom</title>
+  <link rel="preconnect" href="https://cdn.plot.ly" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero" id="top">
+    <nav class="nav" aria-label="Primary navigation">
+      <a class="brand" href="#top">WDI Explorer</a>
+      <div class="nav-links">
+        <a href="#gdp-capita">GDP per capita</a>
+        <a href="#bubble">GDP & population</a>
+        <a href="#freedom">Economic freedom</a>
+        <a href="#components">Components</a>
+        <a href="#references">References</a>
+      </div>
+    </nav>
+    <section class="hero-grid">
+      <div class="hero-copy fade-in">
+        <p class="eyebrow">Static data story • 2025 economic freedom metrics</p>
+        <h1>World Development Indicators: GDP, Population & Index of Economic Freedom.</h1>
+        <p>
+          Compare national output, population scale, GDP per person, and selected
+          institutional indicators in one animated, browser-ready dashboard.
+        </p>
+        <a class="cta" href="#gdp-capita">Explore the visualizations</a>
+      </div>
+      <aside class="top-sidebar fade-in" aria-label="Top three Index of Economic Freedom countries">
+        <h2>Top 3 in this dataset</h2>
+        <p>Animated cards highlight the highest 2025 Index of Economic Freedom scores encoded below.</p>
+        <div id="topCountries" class="country-cards"></div>
+      </aside>
+    </section>
+  </header>
+
+  <main>
+    <section class="intro panel reveal">
+      <h2>Reading GDP alongside institutions</h2>
+      <p>
+        The supplied paper frames GDP as a useful but incomplete measure: national income
+        helps explain production capacity, while population and freedom metrics add context
+        about scale, opportunity, markets, and governance. The charts below pair World
+        Development Indicators style macroeconomic comparisons with 2025 Index of Economic
+        Freedom categories to make those relationships easier to inspect.
+      </p>
+    </section>
+
+    <section id="gdp-capita" class="viz-section reveal">
+      <div class="section-copy">
+        <p class="eyebrow">Geographic heat map</p>
+        <h2>GDP per capita shows output relative to population.</h2>
+        <p>
+          A high GDP total can reflect either very high productivity or a very large population.
+          The paper notes that GDP per capita normalizes output by population, making it a
+          clearer comparison of average economic production across countries.
+        </p>
+      </div>
+      <div class="chart-wrap"><div id="gdpPerCapitaMap" class="chart"></div></div>
+      <p class="caption">Caption: GDP-per-person interpretation follows the BEA GDP primer, OpenStax GDP comparison discussion, and World Bank World Development Indicators source framing.</p>
+    </section>
+
+    <section id="bubble" class="viz-section reveal">
+      <div class="section-copy">
+        <p class="eyebrow">Geographic bubble chart</p>
+        <h2>GDP and population reveal different kinds of economic weight.</h2>
+        <p>
+          Bubble size compares GDP while color compares population, showing why populous
+          countries can be central to global demand even when per-person output differs.
+          This context connects to the AP News discussion of consumer prices in China and
+          the CIA World Factbook summary of Bangladesh's economy.
+        </p>
+      </div>
+      <div class="chart-wrap"><div id="gdpPopulationBubble" class="chart"></div></div>
+      <p class="caption">Caption: The visualization connects GDP, population, and consumer-demand context from AP News, the CIA World Factbook Bangladesh economy entry, and World Bank WDI.</p>
+    </section>
+
+    <section id="freedom" class="viz-section reveal">
+      <div class="section-copy">
+        <p class="eyebrow">Economic freedom geo chart</p>
+        <h2>Overall economic freedom scores add an institutional lens.</h2>
+        <p>
+          The paper treats economic freedom as a complement to GDP comparisons: property
+          rights, regulatory efficiency, open trade, and financial access can influence how
+          people and firms participate in growth. The BBC article on Nigeria EFCC property
+          seizures illustrates why governance and property-rights questions matter.
+        </p>
+      </div>
+      <div class="chart-wrap"><div id="freedomMap" class="chart"></div></div>
+      <p class="caption">Caption: Overall scores and component definitions are based on the Heritage Foundation Index of Economic Freedom, with governance context from the BBC Nigeria EFCC article.</p>
+    </section>
+
+    <section id="components" class="viz-section reveal">
+      <div class="section-copy">
+        <p class="eyebrow">Country component bars</p>
+        <h2>Economic freedom components vary within each country.</h2>
+        <p>
+          Individual bars compare property rights, business freedom, trade freedom, and
+          financial freedom. These components help separate broad national performance from
+          the specific rules and institutions that shape business decisions.
+        </p>
+      </div>
+      <div id="componentCharts" class="component-grid"></div>
+      <p class="caption">Caption: Component bars reference the Heritage Foundation Index of Economic Freedom and the related article set listed below.</p>
+    </section>
+
+    <section id="references" class="references panel reveal">
+      <h2>References and sources</h2>
+      <ul>
+        <li><a href="https://apnews.com/" target="_blank" rel="noreferrer">AP News</a> — article about China consumer prices.</li>
+        <li><a href="https://www.bbc.com/news/" target="_blank" rel="noreferrer">BBC News</a> — article about Nigeria EFCC property seizures.</li>
+        <li><a href="https://www.cia.gov/the-world-factbook/countries/bangladesh/#economy" target="_blank" rel="noreferrer">CIA World Factbook</a> — Bangladesh economy entry.</li>
+        <li><a href="https://www.bea.gov/resources/learning-center/what-to-know-gdp" target="_blank" rel="noreferrer">U.S. Bureau of Economic Analysis</a> — GDP primer.</li>
+        <li><a href="https://openstax.org/books/principles-economics-3e/pages/19-3-comparing-gdp-among-countries" target="_blank" rel="noreferrer">OpenStax</a> — comparing GDP among countries.</li>
+        <li><a href="https://www.heritage.org/index/" target="_blank" rel="noreferrer">Heritage Foundation</a> — Index of Economic Freedom.</li>
+        <li><a href="https://databank.worldbank.org/source/world-development-indicators" target="_blank" rel="noreferrer">World Bank</a> — World Development Indicators.</li>
+      </ul>
+    </section>
+  </main>
+
+  <button class="to-top" aria-label="Back to top">↑</button>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
