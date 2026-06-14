@@ -338,7 +338,10 @@ function renderGDPPerCapitaBar() {
         texttemplate: "%{text}",
         textposition: "auto",
         marker: { color: "#f97316" },
-        hovertemplate:
+textfont: { color: "#ffffff", size: 13 },
+insidetextfont: { color: "#ffffff" },
+outsidetextfont: { color: "#ffffff" },
+hovertemplate:
           "<b>%{y}</b><br>" +
           "GDP Per Capita: $%{x:,.0f}<extra></extra>"
       }
