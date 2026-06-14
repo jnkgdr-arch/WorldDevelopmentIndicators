@@ -10,13 +10,61 @@ const countries = [
 ];
 
 const chartLayout = {
-  paper_bgcolor: "rgba(255,255,255,0)",
-  plot_bgcolor: "rgba(255,255,255,0)",
-  margin: { t: 36, r: 8, b: 10, l: 8 },
-  font: { family: "Inter, Arial, sans-serif", color: "#122033" },
-  geo: { projection: { type: "natural earth" }, bgcolor: "rgba(255,255,255,0)", showframe: false, showcoastlines: true, coastlinecolor: "#9aa9bb" }
-};
+  paper_bgcolor: "rgba(0,0,0,0)",
+  plot_bgcolor: "rgba(0,0,0,0)",
+  margin: { t: 54, r: 12, b: 12, l: 12 },
+  font: {
+    family: "Inter, Arial, sans-serif",
+    color: "#f4f7fb"
+  },
+  title: {
+    font: {
+      color: "#f4f7fb",
+      size: 18
+    }
+  },
+  geo: {
+    projection: {
+      type: "orthographic",
+      rotation: {
+        lon: -20,
+        lat: 12,
+        roll: 0
+      },
+      scale: 0.86
+    },
+    bgcolor: "rgba(0,0,0,0)",
+    showframe: false,
 
+    showland: true,
+    landcolor: "rgba(235, 244, 255, 0.92)",
+
+    showocean: true,
+    oceancolor: "rgba(7, 17, 31, 0.55)",
+
+    showlakes: true,
+    lakecolor: "rgba(113, 224, 255, 0.16)",
+
+    showcoastlines: true,
+    coastlinecolor: "rgba(255,255,255,0.7)",
+    coastlinewidth: 1.2,
+
+    showcountries: true,
+    countrycolor: "rgba(15, 35, 58, 0.65)",
+    countrywidth: 0.8,
+
+    lonaxis: {
+      showgrid: true,
+      gridcolor: "rgba(255,255,255,0.12)",
+      gridwidth: 0.7
+    },
+    lataxis: {
+      showgrid: true,
+      gridcolor: "rgba(255,255,255,0.12)",
+      gridwidth: 0.7
+    }
+  }
+};
 function renderTopCountries() {
   const container = document.querySelector("#topCountries");
   countries.slice(0, 3).forEach((country, index) => {
