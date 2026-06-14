@@ -66,3 +66,71 @@ main { width: min(1180px, calc(100% - 2rem)); margin: 0 auto 4rem; }
 @keyframes slidePulse { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(8px); } }
 @media (max-width: 880px) { .hero-grid { grid-template-columns: 1fr; padding-top: 3rem; } .nav { align-items: flex-start; border-radius: 24px; flex-direction: column; } .chart, .chart-wrap { height: 430px; min-height: 430px; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; scroll-behavior: auto !important; transition: none !important; } .fade-in, .reveal, .chart-wrap { opacity: 1; transform: none; } }
+/* 3D-inspired map tile treatment */
+.chart-wrap.map-tile {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 28% 18%, rgba(113, 224, 255, 0.24), transparent 34%),
+    radial-gradient(circle at 78% 72%, rgba(255, 209, 102, 0.18), transparent 32%),
+    linear-gradient(145deg, rgba(8, 22, 39, 0.98), rgba(18, 35, 58, 0.94));
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 34px 90px rgba(0, 0, 0, 0.48),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -28px 60px rgba(0, 0, 0, 0.28);
+}
+
+.chart-wrap.map-tile::before {
+  content: "";
+  position: absolute;
+  inset: 16px;
+  z-index: 0;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(113, 224, 255, 0.18), transparent 48%),
+    radial-gradient(circle at 50% 50%, transparent 54%, rgba(0, 0, 0, 0.36) 100%);
+  filter: blur(1px);
+  pointer-events: none;
+}
+
+.chart-wrap.map-tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  background:
+    linear-gradient(120deg, rgba(255,255,255,0.22), transparent 24%, transparent 72%, rgba(255,255,255,0.08)),
+    radial-gradient(circle at 50% 0%, rgba(255,255,255,0.16), transparent 42%);
+  mix-blend-mode: screen;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.chart-wrap.map-tile .chart {
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 24px 32px rgba(0, 0, 0, 0.32));
+}
+
+/* Keep your reveal animation, but add a subtle raised angle */
+.reveal.is-visible .chart-wrap.map-tile {
+  transform: translateY(0) perspective(1200px) rotateX(1.5deg);
+}
+
+.chart-wrap.map-tile:hover {
+  box-shadow:
+    0 42px 110px rgba(0, 0, 0, 0.58),
+    0 0 38px rgba(113, 224, 255, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -28px 60px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 880px) {
+  .reveal.is-visible .chart-wrap.map-tile {
+    transform: translateY(0);
+  }
+}
