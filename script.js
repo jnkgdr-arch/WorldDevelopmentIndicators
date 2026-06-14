@@ -214,7 +214,7 @@ function renderOverallScoreBar(data) {
       title: "Overall Score",
       paper_bgcolor: "rgba(0,0,0,0)",
       plot_bgcolor: "rgba(0,0,0,0)",
-      margin: { t: 58, r: 20, b: 48, l: 165 },
+     margin: { t: 58, r: 24, b: 48, l: 185 },
       font: { family: "Inter, Arial, sans-serif", color: "#1e2a3a" },
       xaxis: {
         range: [0, 100],
@@ -223,7 +223,7 @@ function renderOverallScoreBar(data) {
       },
       yaxis: {
         autorange: "reversed",
-        tickfont: { size: 11 }
+        tickfont: { size: 12 }
       }
     },
     { responsive: true, displayModeBar: false }
@@ -265,7 +265,7 @@ function renderWorldRankBar() {
       title: "World Rank Strength",
       paper_bgcolor: "rgba(0,0,0,0)",
       plot_bgcolor: "rgba(0,0,0,0)",
-      margin: { t: 58, r: 20, b: 48, l: 165 },
+      margin: { t: 58, r: 24, b: 48, l: 185 },
       font: { family: "Inter, Arial, sans-serif", color: "#1e2a3a" },
       xaxis: {
         title: "Lower rank = stronger",
@@ -274,7 +274,7 @@ function renderWorldRankBar() {
       },
       yaxis: {
         autorange: "reversed",
-        tickfont: { size: 11 }
+        tickfont: { size: 12 }
       }
     },
     { responsive: true, displayModeBar: false }
@@ -308,7 +308,7 @@ function renderGDPPerCapitaBar() {
       title: "GDP Per Capita",
       paper_bgcolor: "rgba(0,0,0,0)",
       plot_bgcolor: "rgba(0,0,0,0)",
-      margin: { t: 58, r: 20, b: 48, l: 165 },
+      margin: { t: 58, r: 24, b: 48, l: 185 },
       font: { family: "Inter, Arial, sans-serif", color: "#1e2a3a" },
       xaxis: {
         tickprefix: "$",
@@ -317,7 +317,7 @@ function renderGDPPerCapitaBar() {
       },
       yaxis: {
         autorange: "reversed",
-        tickfont: { size: 11 }
+        tickfont: { size: 12 }
       }
     },
     { responsive: true, displayModeBar: false }
