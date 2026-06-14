@@ -237,7 +237,10 @@ function renderOverallScoreBar(data) {
         text: rankedByScore.map(country => country.overallScore),
         texttemplate: "%{text}",
         textposition: "auto",
-        marker: { color: "#1e4385" },
+        marker: { color: "#2563eb" },
+        textfont: { color: "#ffffff", size: 13 },
+insidetextfont: { color: "#ffffff" },
+outsidetextfont: { color: "#ffffff" },
         hovertemplate:
           "<b>%{y}</b><br>" +
           "Overall Score: %{x}<extra></extra>"
@@ -378,7 +381,7 @@ function renderComponentCharts() {
   });
 
   const freedomSegments = [
-    { key: "propertyRights", label: "Property Rights", color: "#1e4385" },
+    { key: "propertyRights", label: "Property Rights", color: "#2563eb" },
     { key: "businessFreedom", label: "Business Freedom", color: "#0d9488" },
     { key: "tradeFreedom", label: "Trade Freedom", color: "#f97316" },
     { key: "financialFreedom", label: "Financial Freedom", color: "#8b5cf6" }
