@@ -85,7 +85,24 @@ function renderGeoCharts() {
 
   Plotly.newPlot("gdpPopulationBubble", [{
     type: "scattergeo", mode: "markers+text", locations: countries.map(c => c.iso3), text: countries.map(c => c.name), hovertext: countries.map(c => `${c.name}<br>GDP: $${c.gdp.toLocaleString()}B<br>Population: ${c.population.toLocaleString()}M`),
-    marker: { size: countries.map(c => Math.sqrt(c.gdp) * 2.2), color: countries.map(c => c.population), colorscale: "Portland", opacity: 0.78, line: { color: "white", width: 1 }, colorbar: { title: "Population (M)" } }
+    marker: {
+  size: countries.map(c => Math.sqrt(c.gdp) * 2.2),
+  color: countries.map(c => c.population),
+  colorscale: "Portland",
+  opacity: 0.86,
+  line: {
+    color: "rgba(255,255,255,0.95)",
+    width: 1.8
+  },
+  colorbar: {
+    title: "Population (M)",
+    bgcolor: "rgba(7,17,31,0.72)",
+    bordercolor: "rgba(255,255,255,0.22)",
+    borderwidth: 1,
+    tickfont: { color: "#f4f7fb" },
+    titlefont: { color: "#f4f7fb" }
+  }
+}
   }], { ...chartLayout, title: "GDP bubble size and population color" }, { responsive: true, displayModeBar: false });
 
   Plotly.newPlot("freedomMap", [{
