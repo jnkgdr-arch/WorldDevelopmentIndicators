@@ -1,165 +1,433 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+:root {
+  --navy: #1e4385;
+  --teal: #0d9488;
+  --orange: #f97316;
+  --slate: #1e2a3a;
+  --muted: #64748b;
+  --soft: #f1f5f9;
+  --white: #ffffff;
+  --line: rgba(30, 42, 58, 0.12);
+  --shadow: 0 24px 70px rgba(15, 23, 42, 0.14);
+  --radius: 28px;
+}
 
-  <title>World Development Indicators: GDP, Population & Index of Economic Freedom</title>
+* {
+  box-sizing: border-box;
+}
 
-  <link rel="preconnect" href="https://cdn.plot.ly" />
-  <link rel="stylesheet" href="styles.css" />
-</head>
+html {
+  scroll-behavior: smooth;
+}
 
-<body>
-  <header class="hero" id="top">
-    <nav class="nav" aria-label="Primary navigation">
-      <a class="brand" href="#top">WDI Explorer</a>
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(13, 148, 136, 0.12), transparent 32%),
+    radial-gradient(circle at top right, rgba(249, 115, 22, 0.1), transparent 30%),
+    var(--soft);
+  color: var(--slate);
+  line-height: 1.6;
+}
 
-      <div class="nav-links">
-        <a href="#gdp-capita">GDP per capita</a>
-        <a href="#gdp-population">GDP & population</a>
-        <a href="#freedom">Economic freedom</a>
-        <a href="#components">Components</a>
-        <a href="#references">References</a>
-      </div>
-    </nav>
+a {
+  color: inherit;
+}
 
-    <section class="hero-grid">
-      <div class="hero-copy fade-in">
-        <p class="eyebrow">Static data story • 2025 economic freedom metrics</p>
-        <h1>World Development Indicators: GDP, Population & Index of Economic Freedom.</h1>
-        <p>
-          Compare national output, population scale, GDP per person, and selected
-          institutional indicators in one animated, browser-ready dashboard.
-        </p>
-        <a class="cta" href="#gdp-capita">Explore the visualizations</a>
-      </div>
+.hero {
+  min-height: 92vh;
+  padding: 28px clamp(18px, 4vw, 64px) 72px;
+  color: var(--white);
+  background:
+    linear-gradient(135deg, rgba(9, 22, 45, 0.96), rgba(30, 67, 133, 0.88)),
+    radial-gradient(circle at 70% 22%, rgba(249, 115, 22, 0.32), transparent 28%),
+    radial-gradient(circle at 18% 75%, rgba(13, 148, 136, 0.3), transparent 28%);
+  overflow: hidden;
+  position: relative;
+}
 
-      <aside class="top-sidebar fade-in" aria-label="Top three Index of Economic Freedom countries">
-        <h2>Top 3 in this dataset</h2>
-        <p>Animated cards highlight the highest 2025 Index of Economic Freedom scores encoded below.</p>
-        <div id="topCountries" class="country-cards"></div>
-      </aside>
-    </section>
-  </header>
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 52px 52px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent);
+  pointer-events: none;
+}
 
-  <main>
-    <section class="intro panel reveal">
-      <h2>Reading GDP alongside institutions</h2>
-      <p>
-        The supplied paper frames GDP as a useful but incomplete measure: national income
-        helps explain production capacity, while population and freedom metrics add context
-        about scale, opportunity, markets, and governance. The charts below pair World
-        Development Indicators style macroeconomic comparisons with 2025 Index of Economic
-        Freedom categories to make those relationships easier to inspect.
-      </p>
-    </section>
+.nav {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 90px;
+}
 
-    <section id="gdp-capita" class="viz-section reveal">
-      <div class="section-copy">
-        <p class="eyebrow">Geographic heat map</p>
-        <h2>GDP per capita shows output relative to population.</h2>
-        <p>
-          A high GDP total can reflect either very high productivity or a very large population.
-          GDP per capita normalizes output by population, making it a clearer comparison of
-          average economic production across countries.
-        </p>
-      </div>
+.brand {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
 
-      <div class="chart-wrap map-tile">
-        <div id="gdpPerCapitaMap" class="chart"></div>
-      </div>
+.nav-links {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
 
-      <p class="caption">
-        Caption: GDP-per-person interpretation follows the BEA GDP primer, OpenStax GDP comparison discussion, and World Bank World Development Indicators source framing.
-      </p>
-    </section>
+.nav-links a {
+  color: rgba(255, 255, 255, 0.82);
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
 
-    <section id="gdp-population" class="viz-section reveal">
-      <div class="section-copy">
-        <p class="eyebrow">Geographic heat map</p>
-        <h2>GDP heat intensity shows national economic scale.</h2>
-        <p>
-          The heat map compares GDP across selected countries, while hover labels provide
-          population and GDP per capita context for each economy.
-        </p>
-      </div>
+.nav-links a:hover {
+  color: var(--white);
+}
 
-      <div class="chart-wrap map-tile">
-        <div id="gdpPopulationHeatMap" class="chart"></div>
-      </div>
+.hero-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.65fr);
+  gap: 44px;
+  align-items: center;
+}
 
-      <p class="caption">
-        Caption: The visualization connects GDP, population, and consumer-demand context from AP News, the CIA World Factbook Bangladesh economy entry, and World Bank WDI.
-      </p>
-    </section>
+.hero-copy h1 {
+  max-width: 920px;
+  margin: 0;
+  font-size: clamp(2.6rem, 7vw, 6.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.07em;
+}
 
-    <section id="freedom" class="viz-section reveal">
-      <div class="section-copy">
-        <p class="eyebrow">Index of Economic Freedom</p>
-        <h2>Overall score, world rank, and GDP per capita compare economic outcomes.</h2>
-        <p>
-          These bar charts compare each country’s overall economic freedom score, world rank
-          strength, and GDP per capita. This keeps the comparison clear without using sunburst charts.
-        </p>
-      </div>
+.hero-copy p:not(.eyebrow) {
+  max-width: 740px;
+  margin: 28px 0;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: clamp(1rem, 1.8vw, 1.25rem);
+}
 
-      <div class="bar-chart-grid">
-        <div class="chart-wrap">
-          <div id="overallScoreBar" class="chart"></div>
-        </div>
+.eyebrow {
+  margin: 0 0 14px;
+  color: var(--orange);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
 
-        <div class="chart-wrap">
-          <div id="worldRankBar" class="chart"></div>
-        </div>
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 22px;
+  border-radius: 999px;
+  background: var(--orange);
+  color: var(--white);
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 0 14px 34px rgba(249, 115, 22, 0.34);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
 
-        <div class="chart-wrap">
-          <div id="gdpPerCapitaBar" class="chart"></div>
-        </div>
-      </div>
+.cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 42px rgba(249, 115, 22, 0.42);
+}
 
-      <p class="caption">
-        Caption: Overall scores, world rank, and GDP per capita are based on the 2025 Index of Economic Freedom dataset provided.
-      </p>
-    </section>
+.top-sidebar {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius);
+  padding: 26px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.28);
+}
 
-    <section id="components" class="viz-section reveal">
-      <div class="section-copy">
-        <p class="eyebrow">Economic freedom components</p>
-        <h2>Economic freedom components vary across countries.</h2>
-        <p>
-          A stacked bar chart compares property rights, business freedom, trade freedom,
-          and financial freedom across all countries in one view.
-        </p>
-      </div>
+.top-sidebar h2 {
+  margin: 0 0 8px;
+  font-size: 1.25rem;
+}
 
-      <div class="chart-wrap">
-        <div id="componentCharts" class="chart"></div>
-      </div>
+.top-sidebar p {
+  margin: 0 0 20px;
+  color: rgba(255, 255, 255, 0.72);
+}
 
-      <p class="caption">
-        Caption: Component bars reference the Index of Economic Freedom categories listed in the supplied dataset.
-      </p>
-    </section>
+.country-cards {
+  display: grid;
+  gap: 14px;
+}
 
-    <section id="references" class="references panel reveal">
-      <h2>References and sources</h2>
+.country-card {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.13);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
 
-      <ul>
-        <li><a href="https://apnews.com/" target="_blank" rel="noreferrer">AP News</a> — article about China consumer prices.</li>
-        <li><a href="https://www.bbc.com/news/" target="_blank" rel="noreferrer">BBC News</a> — article about Nigeria EFCC property seizures.</li>
-        <li><a href="https://www.cia.gov/the-world-factbook/countries/bangladesh/#economy" target="_blank" rel="noreferrer">CIA World Factbook</a> — Bangladesh economy entry.</li>
-        <li><a href="https://www.bea.gov/resources/learning-center/what-to-know-gdp" target="_blank" rel="noreferrer">U.S. Bureau of Economic Analysis</a> — GDP primer.</li>
-        <li><a href="https://openstax.org/books/principles-economics-3e/pages/19-3-comparing-gdp-among-countries" target="_blank" rel="noreferrer">OpenStax</a> — comparing GDP among countries.</li>
-        <li><a href="https://www.heritage.org/index/" target="_blank" rel="noreferrer">Heritage Foundation</a> — Index of Economic Freedom.</li>
-        <li><a href="https://databank.worldbank.org/source/world-development-indicators" target="_blank" rel="noreferrer">World Bank</a> — World Development Indicators.</li>
-      </ul>
-    </section>
-  </main>
+.country-card .flag {
+  font-size: 1.5rem;
+}
 
-  <button class="to-top" aria-label="Back to top">↑</button>
+.country-card strong {
+  color: var(--white);
+}
 
-  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
-  <script src="script.js"></script>
-</body>
-</html>
+.country-card small {
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.country-card .score {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 50px;
+  padding: 8px 10px;
+  border-radius: 14px;
+  background: rgba(249, 115, 22, 0.18);
+  color: #ffd6bd;
+  font-weight: 900;
+}
+
+main {
+  width: min(1180px, calc(100% - 36px));
+  margin: 0 auto;
+  padding: 54px 0 90px;
+}
+
+.panel,
+.viz-section {
+  margin: 0 0 42px;
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(255, 255, 255, 0.92);
+  box-shadow: var(--shadow);
+}
+
+.panel {
+  padding: clamp(24px, 4vw, 44px);
+}
+
+.panel h2,
+.section-copy h2 {
+  margin: 0;
+  font-size: clamp(1.65rem, 3.8vw, 3.2rem);
+  line-height: 1.02;
+  letter-spacing: -0.05em;
+}
+
+.panel p,
+.section-copy p:not(.eyebrow),
+.caption {
+  color: var(--muted);
+}
+
+.viz-section {
+  padding: clamp(20px, 3vw, 34px);
+}
+
+.section-copy {
+  max-width: 850px;
+  margin-bottom: 24px;
+}
+
+.section-copy p:not(.eyebrow) {
+  margin: 18px 0 0;
+}
+
+.chart-wrap {
+  position: relative;
+  min-height: 520px;
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(248, 250, 252, 0.96));
+  border: 1px solid rgba(30, 42, 58, 0.09);
+  box-shadow:
+    0 22px 50px rgba(15, 23, 42, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.82);
+  overflow: hidden;
+}
+
+.chart {
+  width: 100%;
+  min-height: 520px;
+}
+
+.chart-wrap.map-tile {
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 28% 18%, rgba(113, 224, 255, 0.24), transparent 34%),
+    radial-gradient(circle at 78% 72%, rgba(255, 209, 102, 0.18), transparent 32%),
+    linear-gradient(145deg, rgba(8, 22, 39, 0.98), rgba(18, 35, 58, 0.94));
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 34px 90px rgba(0, 0, 0, 0.48),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -28px 60px rgba(0, 0, 0, 0.28);
+}
+
+.chart-wrap.map-tile .chart {
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 24px 32px rgba(0, 0, 0, 0.32));
+}
+
+.caption {
+  margin: 16px 0 0;
+  font-size: 0.92rem;
+}
+
+.bar-chart-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  margin-top: 24px;
+}
+
+.bar-chart-grid .chart-wrap {
+  min-height: 460px;
+}
+
+.bar-chart-grid .chart {
+  min-height: 440px;
+}
+
+#componentCharts {
+  min-height: 760px;
+}
+
+.references ul {
+  margin: 24px 0 0;
+  padding-left: 20px;
+}
+
+.references li {
+  margin-bottom: 10px;
+  color: var(--muted);
+}
+
+.references a {
+  color: var(--navy);
+  font-weight: 800;
+}
+
+.to-top {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 46px;
+  height: 46px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--slate);
+  color: var(--white);
+  font-size: 1.1rem;
+  font-weight: 900;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.22);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+  z-index: 20;
+}
+
+.to-top.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.fade-in,
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+
+.fade-in.is-visible,
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 980px) {
+  .hero {
+    min-height: auto;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nav {
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: 56px;
+  }
+
+  .nav-links {
+    justify-content: flex-start;
+  }
+
+  .bar-chart-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .chart-wrap,
+  .chart {
+    min-height: 470px;
+  }
+
+  #componentCharts {
+    min-height: 820px;
+  }
+}
+
+@media (max-width: 640px) {
+  main {
+    width: min(100% - 24px, 1180px);
+    padding-top: 30px;
+  }
+
+  .hero {
+    padding: 22px 18px 54px;
+  }
+
+  .nav-links {
+    gap: 12px;
+  }
+
+  .nav-links a {
+    font-size: 0.84rem;
+  }
+
+  .top-sidebar,
+  .panel,
+  .viz-section {
+    border-radius: 22px;
+  }
+
+  .chart-wrap,
+  .chart {
+    min-height: 440px;
+  }
+}
