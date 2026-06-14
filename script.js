@@ -393,7 +393,13 @@ function renderComponentCharts() {
       type: "bar",
       orientation: "h",
       name: segment.label,
-      y: componentData.map(country => `${country.flag} ${country.country}`),
+      y: componentData.map(country => {
+  const cleanName = country.country
+    .replace("The Philippines", "Philippines")
+    .replace("Trinidad and Tobago", "Trinidad & Tobago");
+
+  return `${country.flag} ${cleanName}`;
+}),,
       x: componentData.map(country => country[segment.key] ?? 0),
       text: componentData.map(country => country[segment.key] === null ? "" : country[segment.key]),
       texttemplate: "%{text}",
@@ -432,17 +438,20 @@ customdata: componentData.map(country => [
       barmode: "stack",
       paper_bgcolor: "rgba(0,0,0,0)",
       plot_bgcolor: "rgba(0,0,0,0)",
-      margin: { t: 68, r: 36, b: 92, l: 190 },
+      margin: { t: 68, r: 36, b: 92, l: 285 },
       font: {
         family: "Inter, Arial, sans-serif",
         color: "#ffffff"
       },
       xaxis: {
-        title: "Combined component score",
-        range: [0, 400],
-        gridcolor: "rgba(30,42,58,0.12)",
-        zeroline: false
-      },
+  title: "Combined component score",
+  range: [-18, 400],
+  tickvals: [0, 100, 200, 300, 400],
+  tickfont: { color: "#ffffff" },
+  titlefont: { color: "#ffffff" },
+  gridcolor: "rgba(255,255,255,0.12)",
+  zeroline: false
+},
       yaxis: {
         autorange: "reversed",
         tickfont: { size: 12,  color: "#ffffff" }
