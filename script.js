@@ -399,7 +399,7 @@ function renderComponentCharts() {
     .replace("Trinidad and Tobago", "Trinidad & Tobago");
 
   return `${country.flag} ${cleanName}`;
-}),,
+}),
       x: componentData.map(country => country[segment.key] ?? 0),
       text: componentData.map(country => country[segment.key] === null ? "" : country[segment.key]),
       texttemplate: "%{text}",
