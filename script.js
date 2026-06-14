@@ -25,6 +25,9 @@ const chartLayout = {
   },
   geo: {
     projection: {
+  type: "natural earth",
+  scale: 1
+}
       type: "orthographic",
       rotation: {
         lon: -20,
