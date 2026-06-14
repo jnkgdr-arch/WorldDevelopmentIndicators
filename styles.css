@@ -787,3 +787,12 @@ main {
 #components .chart-wrap {
   transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
+/* Rounded ends for Plotly horizontal bars */
+#overallScoreBar .barlayer path,
+#worldRankBar .barlayer path,
+#gdpPerCapitaBar .barlayer path,
+#componentCharts .barlayer path {
+  rx: 8px;
+  ry: 8px;
+  stroke-linejoin: round;
+}
