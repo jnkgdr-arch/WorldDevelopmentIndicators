@@ -27,6 +27,39 @@ const economicFreedomData = [
   { country: "Vietnam", iso3: "VNM", flag: "🇻🇳", worldRank: "61", overallScore: 65.2, propertyRights: 49.9, businessFreedom: 73.9, tradeFreedom: 79.8, financialFreedom: 50, perCapitaGDP: 4282.088517 }
 ];
 
+const iso3ToIso2 = {
+  BGD: "bd",
+  CMR: "cm",
+  CHN: "cn",
+  CUB: "cu",
+  SLV: "sv",
+  FIN: "fi",
+  IRL: "ie",
+  MEX: "mx",
+  NGA: "ng",
+  THA: "th",
+  PHL: "ph",
+  TTO: "tt",
+  UKR: "ua",
+  USA: "us",
+  VNM: "vn"
+};
+
+function flagImages(data) {
+  return data.map(country => ({
+    source: `https://flagcdn.com/w40/${iso3ToIso2[country.iso3]}.png`,
+    xref: "paper",
+    yref: "y",
+    x: -0.035,
+    y: country.country,
+    sizex: 0.03,
+    sizey: 0.55,
+    xanchor: "right",
+    yanchor: "middle",
+    layer: "above"
+  }));
+}
+
 const chartLayout = {
   paper_bgcolor: "rgba(0,0,0,0)",
   plot_bgcolor: "rgba(0,0,0,0)",
@@ -199,7 +232,7 @@ function renderOverallScoreBar(data) {
       {
         type: "bar",
         orientation: "h",
-        y: rankedByScore.map(country => `${country.flag} ${country.country}`),
+        y: rankedByScore.map(country => country.country),
         x: rankedByScore.map(country => country.overallScore),
         text: rankedByScore.map(country => country.overallScore),
         texttemplate: "%{text}",
@@ -212,9 +245,10 @@ function renderOverallScoreBar(data) {
     ],
     {
       title: "Overall Score",
+      images: flagImages(rankedByScore),
       paper_bgcolor: "rgba(0,0,0,0)",
       plot_bgcolor: "rgba(0,0,0,0)",
-     margin: { t: 58, r: 24, b: 48, l: 185 },
+      margin: { t: 58, r: 24, b: 48, l: 205 },
       font: { family: "Inter, Arial, sans-serif", color: "#1e2a3a" },
       xaxis: {
         range: [0, 100],
@@ -223,7 +257,8 @@ function renderOverallScoreBar(data) {
       },
       yaxis: {
         autorange: "reversed",
-        tickfont: { size: 12 }
+        tickfont: { size: 12 },
+        automargin: true
       }
     },
     { responsive: true, displayModeBar: false }
@@ -248,7 +283,7 @@ function renderWorldRankBar() {
       {
         type: "bar",
         orientation: "h",
-        y: rankedByWorldRank.map(country => `${country.flag} ${country.country}`),
+        y: rankedByWorldRank.map(country => country.country),
         x: rankedByWorldRank.map(country => country.rankStrength),
         text: rankedByWorldRank.map(country => `#${country.worldRank}`),
         texttemplate: "%{text}",
@@ -263,9 +298,10 @@ function renderWorldRankBar() {
     ],
     {
       title: "World Rank Strength",
+      images: flagImages(rankedByWorldRank),
       paper_bgcolor: "rgba(0,0,0,0)",
       plot_bgcolor: "rgba(0,0,0,0)",
-      margin: { t: 58, r: 24, b: 48, l: 185 },
+      margin: { t: 58, r: 24, b: 48, l: 205 },
       font: { family: "Inter, Arial, sans-serif", color: "#1e2a3a" },
       xaxis: {
         title: "Lower rank = stronger",
@@ -274,7 +310,8 @@ function renderWorldRankBar() {
       },
       yaxis: {
         autorange: "reversed",
-        tickfont: { size: 12 }
+        tickfont: { size: 12 },
+        automargin: true
       }
     },
     { responsive: true, displayModeBar: false }
@@ -293,7 +330,7 @@ function renderGDPPerCapitaBar() {
       {
         type: "bar",
         orientation: "h",
-        y: rankedByGDP.map(country => `${country.flag} ${country.country}`),
+        y: rankedByGDP.map(country => country.country),
         x: rankedByGDP.map(country => country.perCapitaGDP),
         text: rankedByGDP.map(country => `$${Math.round(country.perCapitaGDP).toLocaleString()}`),
         texttemplate: "%{text}",
@@ -306,9 +343,10 @@ function renderGDPPerCapitaBar() {
     ],
     {
       title: "GDP Per Capita",
+      images: flagImages(rankedByGDP),
       paper_bgcolor: "rgba(0,0,0,0)",
       plot_bgcolor: "rgba(0,0,0,0)",
-      margin: { t: 58, r: 24, b: 48, l: 185 },
+      margin: { t: 58, r: 24, b: 48, l: 205 },
       font: { family: "Inter, Arial, sans-serif", color: "#1e2a3a" },
       xaxis: {
         tickprefix: "$",
@@ -317,7 +355,8 @@ function renderGDPPerCapitaBar() {
       },
       yaxis: {
         autorange: "reversed",
-        tickfont: { size: 12 }
+        tickfont: { size: 12 },
+        automargin: true
       }
     },
     { responsive: true, displayModeBar: false }
