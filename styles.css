@@ -888,7 +888,8 @@ main {
     display: none;
   }
 }
- /* Country economic snapshots section */
+
+/* Country economic snapshots section */
 .country-snapshot-section {
   background:
     radial-gradient(circle at 15% 10%, rgba(37, 99, 235, 0.18), transparent 32%),
@@ -910,75 +911,165 @@ main {
   -webkit-backdrop-filter: blur(18px);
 }
 
-.country-snapshot-header {
-  max-width: 850px;
-  margin-bottom: 22px;
+/* Infographic-style country snapshot layout */
+.china-infographic-layout {
+  display: grid;
+  gap: 20px;
 }
 
-.country-snapshot-header h3 {
-  margin: 14px 0 12px;
-  font-size: clamp(2rem, 4vw, 3.4rem);
-  line-height: 1;
+.snapshot-title-panel {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: center;
+  padding: 28px;
+  border-radius: 26px;
+  background:
+    radial-gradient(circle at 82% 18%, rgba(248, 113, 113, 0.16), transparent 30%),
+    linear-gradient(145deg, rgba(15, 23, 42, 0.96), rgba(30, 67, 133, 0.72));
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.snapshot-title-panel h3 {
+  margin: 12px 0 12px;
+  font-size: clamp(2rem, 4vw, 3.7rem);
+  line-height: 0.96;
   color: #ffffff;
+  letter-spacing: -0.05em;
 }
 
-.country-snapshot-header p {
-  color: rgba(255, 255, 255, 0.78);
-  line-height: 1.65;
+.snapshot-title-panel p {
+  max-width: 720px;
+  margin: 0;
+  color: rgba(226, 232, 240, 0.8);
+  line-height: 1.6;
 }
 
-.country-snapshot-grid {
+.snapshot-country-mark {
+  display: grid;
+  place-items: center;
+  width: 92px;
+  height: 92px;
+  border-radius: 999px;
+  font-size: 3rem;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.05));
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow:
+    0 18px 44px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.snapshot-stat-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
-  margin-top: 22px;
 }
 
-.country-stat-card {
-  min-height: 145px;
+.snapshot-stat-box {
+  min-height: 150px;
   padding: 22px;
   border-radius: 24px;
   background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.05));
+    linear-gradient(145deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
   border: 1px solid rgba(255, 255, 255, 0.16);
   box-shadow:
     0 18px 46px rgba(0, 0, 0, 0.26),
     inset 0 1px 0 rgba(255, 255, 255, 0.16);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
-.country-stat-card strong {
-  font-size: clamp(2rem, 4vw, 3.15rem);
+.snapshot-stat-box span {
+  display: block;
+  margin-bottom: 10px;
   color: #f87171;
+  font-size: clamp(2rem, 4vw, 3.1rem);
+  font-weight: 900;
   line-height: 1;
 }
 
-.country-stat-card span {
-  margin-top: 10px;
-  color: rgba(255, 255, 255, 0.78);
+.snapshot-stat-box p {
+  margin: 0;
+  color: rgba(226, 232, 240, 0.78);
   font-size: 0.92rem;
   line-height: 1.45;
 }
 
-.country-insight-grid {
+.snapshot-info-section {
+  padding: 24px;
+  border-radius: 26px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.04));
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.snapshot-info-section h4,
+.snapshot-info-card h4 {
+  margin: 0 0 16px;
+  color: #ffffff;
+  font-size: 1.15rem;
+}
+
+.snapshot-mini-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 12px;
+}
+
+.snapshot-mini-box {
+  min-height: 120px;
+  padding: 16px;
+  border-radius: 18px;
+  background:
+    linear-gradient(145deg, rgba(15, 23, 42, 0.84), rgba(30, 67, 133, 0.42));
+  border: 1px solid rgba(255, 255, 255, 0.13);
+}
+
+.snapshot-mini-box strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #ffffff;
+  font-size: 0.9rem;
+  line-height: 1.15;
+}
+
+.snapshot-mini-box span {
+  color: rgba(226, 232, 240, 0.72);
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+.snapshot-three-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 18px;
-  margin-top: 18px;
 }
 
-.country-takeaway-card {
-  margin-top: 18px;
-  padding: 24px 28px;
-  border-radius: 24px;
+.snapshot-info-card {
+  padding: 22px;
+  border-radius: 22px;
+  background:
+    linear-gradient(145deg, rgba(15, 23, 42, 0.9), rgba(30, 67, 133, 0.58));
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow:
+    0 18px 42px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.snapshot-info-card p {
+  margin: 0;
+  color: rgba(226, 232, 240, 0.76);
+  font-size: 0.92rem;
+}
+
+.snapshot-takeaway-band {
   display: grid;
-  grid-template-columns: 180px 1fr;
+  grid-template-columns: 170px 1fr;
   gap: 24px;
   align-items: center;
+  padding: 24px 28px;
+  border-radius: 24px;
   background:
-    linear-gradient(145deg, rgba(34, 197, 94, 0.14), rgba(255, 255, 255, 0.05));
+    linear-gradient(145deg, rgba(34, 197, 94, 0.16), rgba(255, 255, 255, 0.05));
   border: 1px solid rgba(34, 197, 94, 0.32);
   box-shadow:
     0 20px 54px rgba(0, 0, 0, 0.3),
@@ -986,29 +1077,47 @@ main {
     inset 0 1px 0 rgba(255, 255, 255, 0.16);
 }
 
-.country-takeaway-card span {
+.snapshot-takeaway-band strong {
   color: #22c55e;
-  font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.12em;
   font-size: 0.82rem;
 }
 
-.country-takeaway-card p {
+.snapshot-takeaway-band p {
   margin: 0;
   color: rgba(255, 255, 255, 0.84);
   line-height: 1.6;
 }
 
-@media (max-width: 900px) {
-  .country-snapshot-grid,
-  .country-insight-grid {
+/* Mobile adjustment for country snapshot infographic */
+@media (max-width: 1000px) {
+  .snapshot-stat-grid,
+  .snapshot-three-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .snapshot-mini-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .snapshot-title-panel,
+  .snapshot-takeaway-band {
     grid-template-columns: 1fr;
   }
 
-  .country-takeaway-card {
+  .snapshot-stat-grid,
+  .snapshot-three-grid,
+  .snapshot-mini-grid {
     grid-template-columns: 1fr;
-    gap: 10px;
+  }
+
+  .snapshot-country-mark {
+    width: 72px;
+    height: 72px;
+    font-size: 2.3rem;
   }
 }
 
