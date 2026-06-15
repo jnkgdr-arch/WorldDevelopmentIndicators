@@ -888,6 +888,7 @@ main {
     display: none;
   }
 }
+
 /* Stand-alone China economic snapshot infographic */
 .snapshot-section {
   background:
@@ -929,6 +930,7 @@ main {
   max-width: 980px;
   margin: 18px auto 0;
 }
+
 /* Mobile-only adjustment for the stacked bar chart */
 @media (max-width: 768px) {
   #components .chart-wrap {
