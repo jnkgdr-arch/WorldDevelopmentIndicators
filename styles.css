@@ -1121,6 +1121,27 @@ main {
   }
 }
 
+/* Additional country comparison notes */
+.snapshot-comparison-strip {
+  margin-top: 28px;
+}
+
+.snapshot-comparison-strip .snapshot-mini-grid {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 1000px) {
+  .snapshot-comparison-strip .snapshot-mini-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .snapshot-comparison-strip .snapshot-mini-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Mobile-only adjustment for the stacked bar chart */
 @media (max-width: 768px) {
   #components .chart-wrap {
