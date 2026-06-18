@@ -57,21 +57,24 @@ main { width: min(1220px, calc(100% - 2rem)); margin: 0 auto 4rem; }
 .context-stack { display: grid; gap: 0.85rem; }
 .text-card { padding: 1rem; box-shadow: none; background: rgba(255,255,255,0.09); }
 .text-card h3 { margin: 0 0 0.45rem; font-size: 1rem; color: var(--text); }
-.chart-wrap { height: clamp(300px, 30vw, 380px); min-height: 300px; margin: 0; border-radius: 20px; overflow: hidden; background: rgba(255,255,255,0.94); transform: translateY(16px); opacity: 0; transition: transform 700ms ease, opacity 700ms ease; }
+.chart-wrap { height: clamp(300px, 30vw, 380px); min-height: 300px; margin: 0; border-radius: 20px; overflow: hidden; background: rgba(7, 17, 31, 0.98); border: 1px solid rgba(113,224,255,0.18); transform: translateY(16px); opacity: 0; transition: transform 700ms ease, opacity 700ms ease; }
 .reveal.is-visible .chart-wrap { transform: translateY(0); opacity: 1; }
 .chart { width: 100%; height: 100%; min-height: 0; }
-.freedom-chart-grid, .component-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 1rem; align-items: start; }
+.freedom-chart-grid, .component-grid, .index-bar-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 1rem; align-items: start; }
 .freedom-chart-grid .chart-wrap { height: clamp(300px, 29vw, 360px); }
 .heatmap-card { height: clamp(300px, 28vw, 350px); }
-.component-card { background: rgba(255,255,255,0.95); border-radius: 20px; padding: 0.65rem; min-width: 0; color: #122033; }
+.component-card { background: rgba(7, 17, 31, 0.98); border: 1px solid rgba(113,224,255,0.18); border-radius: 20px; padding: 0.65rem; min-width: 0; color: var(--text); transition: box-shadow 240ms ease, border-color 240ms ease; }
 .component-summary { display: grid; grid-template-columns: auto 1fr; gap: 0.45rem 0.75rem; align-items: center; padding: 0.25rem 0.35rem 0.45rem; }
 .component-summary .flag { font-size: 1.7rem; }
 .component-summary h3 { margin: 0; font-size: 1rem; }
-.component-summary p { margin: 0.1rem 0 0; color: #48566a; font-size: 0.82rem; line-height: 1.35; }
+.component-summary p { margin: 0.1rem 0 0; color: var(--muted); font-size: 0.82rem; line-height: 1.35; }
 .metric-row { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.35rem; }
-.metric-pill { border-radius: 12px; background: #eef4fb; padding: 0.35rem; font-size: 0.76rem; text-align: center; }
-.metric-pill strong { display: block; font-size: 0.9rem; color: #0f1f33; }
+.metric-pill { border-radius: 12px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); padding: 0.35rem; font-size: 0.76rem; text-align: center; }
+.metric-pill strong { display: block; font-size: 0.9rem; color: var(--accent-2); }
 .component-card .chart { height: 235px; }
+.index-bar-grid .chart-wrap { height: clamp(330px, 32vw, 390px); }
+.stacked-chart { height: clamp(320px, 30vw, 380px); margin-top: 1rem; }
+.pulse-highlight { border-color: rgba(255, 209, 102, 0.72); box-shadow: 0 0 0 1px rgba(255, 209, 102, 0.32), 0 18px 60px rgba(255, 209, 102, 0.14); }
 .takeaway-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.8rem; }
 .takeaway-card { padding: 0.9rem; }
 .takeaway-card p { font-size: 0.92rem; line-height: 1.5; }
@@ -84,7 +87,7 @@ main { width: min(1220px, calc(100% - 2rem)); margin: 0 auto 4rem; }
 .fade-in.is-visible, .reveal.is-visible { opacity: 1; transform: translateY(0); }
 @keyframes slidePulse { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(8px); } }
 @media (max-width: 960px) {
-  .hero-grid, .dashboard-grid, .heatmap-layout, .two-column-panel, .freedom-chart-grid, .component-grid, .takeaway-grid { grid-template-columns: 1fr; }
+  .hero-grid, .dashboard-grid, .heatmap-layout, .two-column-panel, .freedom-chart-grid, .component-grid, .index-bar-grid, .takeaway-grid { grid-template-columns: 1fr; }
   .hero-grid { padding-top: 3rem; }
   .nav { align-items: flex-start; border-radius: 24px; flex-direction: column; }
   .chart-wrap { height: 360px; }

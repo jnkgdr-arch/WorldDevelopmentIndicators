@@ -16,6 +16,7 @@
         <a href="#bubble">GDP & population</a>
         <a href="#takeaways">Key takeaways</a>
         <a href="#freedom">Economic freedom</a>
+        <a href="#index-bars">Index bars</a>
         <a href="#components">Components</a>
         <a href="#references">References</a>
       </div>
@@ -42,7 +43,8 @@
     <section class="intro panel reveal">
       <h2>Reading GDP alongside institutions</h2>
       <p>
-       helps explain production capacity, while population and freedom metrics add context
+        The supplied paper frames GDP as a useful but incomplete measure: national income
+        helps explain production capacity, while population and freedom metrics add context
         about scale, opportunity, markets, and governance. The charts below pair World
         Development Indicators style macroeconomic comparisons with 2025 Index of Economic
         Freedom categories to make those relationships easier to inspect.
@@ -121,6 +123,22 @@
       <p class="caption">Caption: Overall scores and component definitions are based on the Heritage Foundation Index of Economic Freedom, with governance context from the BBC Nigeria EFCC article.</p>
     </section>
 
+    <section id="index-bars" class="viz-section reveal">
+      <div class="dashboard-heading">
+        <p class="eyebrow">Index comparison bars</p>
+        <h2>Each freedom component compares all 15 countries at once.</h2>
+        <p>
+          The four compact bar graphs separate property rights, business freedom, trade freedom,
+          and financial freedom so every encoded country remains visible in each comparison.
+          A separate stacked bar graph compares the top-three countries from the sidebar across
+          world rank, freedom score, and financial freedom.
+        </p>
+      </div>
+      <div id="indexComparisonCharts" class="index-bar-grid"></div>
+      <div class="chart-wrap stacked-chart"><div id="topThreeStacked" class="chart"></div></div>
+      <p class="caption">Caption: Index comparison bars reference the Heritage Foundation Index of Economic Freedom and retain all 15 countries in each component graph.</p>
+    </section>
+
     <section id="takeaways" class="viz-section reveal">
       <div class="dashboard-heading">
         <p class="eyebrow">Key takeaways</p>
@@ -168,12 +186,13 @@
         <p class="eyebrow">Country component bars</p>
         <h2>Country Economic Snapshots: economic freedom components vary within each country.</h2>
         <p>
-          A stacked bar chart compares property rights, business freedom, trade freedom,
-          and financial freedom across all countries in one view.
+          Individual bars compare property rights, business freedom, trade freedom, and
+          financial freedom. These components help separate broad national performance from
+          the specific rules and institutions that shape business decisions.
         </p>
       </div>
       <div id="componentCharts" class="component-grid"></div>
-      <p class="caption">Referenced from the Heritage Foundation Index of Economic Freedom and the related article set listed below.</p>
+      <p class="caption">Caption: Component bars reference the Heritage Foundation Index of Economic Freedom and the related article set listed below.</p>
     </section>
 
     <section id="references" class="references panel reveal">
