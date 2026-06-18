@@ -35,10 +35,16 @@ function renderGeoCharts() {
     type: "choropleth", locations: countries.map(c => c.iso3), z: countries.map(c => c.gdpPerCapita), text: countries.map(c => `${c.name}: $${c.gdpPerCapita.toLocaleString()}`), colorscale: "Viridis", colorbar: { title: "GDP per capita" }
   }], { ...chartLayout, title: "GDP per capita (current US$ approximation)" }, { responsive: true, displayModeBar: false });
 
-  Plotly.newPlot("gdpPopulationBubble", [{
-    type: "scattergeo", mode: "markers+text", locations: countries.map(c => c.iso3), text: countries.map(c => c.name), hovertext: countries.map(c => `${c.name}<br>GDP: $${c.gdp.toLocaleString()}B<br>Population: ${c.population.toLocaleString()}M`),
-    marker: { size: countries.map(c => Math.sqrt(c.gdp) * 2.2), color: countries.map(c => c.population), colorscale: "Portland", opacity: 0.78, line: { color: "white", width: 1 }, colorbar: { title: "Population (M)" } }
-  }], { ...chartLayout, title: "GDP bubble size and population color" }, { responsive: true, displayModeBar: false });
+  Plotly.newPlot("gdpPopulationHeatMap", [{
+    type: "choropleth",
+    locations: countries.map(c => c.iso3),
+    z: countries.map(c => c.gdp),
+    text: countries.map(c => c.name),
+    customdata: countries.map(c => [c.population, c.gdpPerCapita]),
+    colorscale: "Portland",
+    colorbar: { title: "GDP (US$B)" },
+    hovertemplate: "%{text}<br>GDP: $%{z:,.1f}B<br>Population: %{customdata[0]:,.1f}M<br>GDP per capita: $%{customdata[1]:,}<extra></extra>"
+  }], { ...chartLayout, title: "GDP heat map with population context" }, { responsive: true, displayModeBar: false });
 
   Plotly.newPlot("freedomMap", [{
     type: "choropleth", locations: countries.map(c => c.iso3), z: countries.map(c => c.freedomScore), text: countries.map(c => `${c.name}: ${c.freedomScore}`), colorscale: "YlGnBu", zmin: 40, zmax: 90, colorbar: { title: "Score" }
@@ -55,11 +61,26 @@ function renderComponentCharts() {
   const grid = document.querySelector("#componentCharts");
   countries.forEach((country, index) => {
     const id = `component-${index}`;
-    grid.insertAdjacentHTML("beforeend", `<article class="component-card"><div id="${id}" class="chart"></div></article>`);
+    grid.insertAdjacentHTML("beforeend", `
+      <article class="component-card">
+        <div class="component-summary">
+          <span class="flag" aria-hidden="true">${country.flag}</span>
+          <div>
+            <h3>${country.name}</h3>
+            <p>GDP $${country.gdp.toLocaleString()}B • Population ${country.population.toLocaleString()}M • GDP per capita $${country.gdpPerCapita.toLocaleString()}</p>
+          </div>
+          <div class="metric-row" aria-label="${country.name} economic freedom summary">
+            <span class="metric-pill"><strong>${country.freedomScore}</strong>Freedom score</span>
+            <span class="metric-pill"><strong>#${country.worldRank}</strong>World rank</span>
+            <span class="metric-pill"><strong>${country.financialFreedom}</strong>Financial freedom</span>
+          </div>
+        </div>
+        <div id="${id}" class="chart"></div>
+      </article>`);
     Plotly.newPlot(id, [{
       type: "bar", orientation: "h", x: [country.propertyRights, country.businessFreedom, country.tradeFreedom, country.financialFreedom],
       y: ["Property rights", "Business freedom", "Trade freedom", "Financial freedom"], marker: { color: ["#2563eb", "#0891b2", "#16a34a", "#f59e0b"] }
-    }], { title: `${country.flag} ${country.name}`, margin: { t: 46, r: 20, b: 32, l: 118 }, xaxis: { range: [0, 100] }, paper_bgcolor: "rgba(255,255,255,0)", plot_bgcolor: "rgba(255,255,255,0)", font: { family: "Inter, Arial, sans-serif", color: "#122033" } }, { responsive: true, displayModeBar: false });
+    }], { title: `${country.flag} ${country.name} component scores`, margin: { t: 38, r: 16, b: 28, l: 112 }, xaxis: { range: [0, 100] }, paper_bgcolor: "rgba(255,255,255,0)", plot_bgcolor: "rgba(255,255,255,0)", font: { family: "Inter, Arial, sans-serif", color: "#122033" } }, { responsive: true, displayModeBar: false });
   });
 }
 
