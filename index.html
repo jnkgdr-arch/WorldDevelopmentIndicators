@@ -3,45 +3,35 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>World Development Indicators: GDP, Population & Index of Economic Freedom</title>
-
   <link rel="preconnect" href="https://cdn.plot.ly" />
   <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
   <header class="hero" id="top">
     <nav class="nav" aria-label="Primary navigation">
       <a class="brand" href="#top">WDI Explorer</a>
-
       <div class="nav-links">
         <a href="#gdp-capita">GDP per capita</a>
-        <a href="#gdp-population">GDP & population</a>
+        <a href="#bubble">GDP & population</a>
         <a href="#freedom">Economic freedom</a>
-       <a href="#components">Components</a>
-<a href="#country-snapshots">Country snapshots</a>
-<a href="#references">References</a>
+        <a href="#components">Components</a>
+        <a href="#references">References</a>
       </div>
     </nav>
-
-    <div class="floating-globe" aria-hidden="true">
-  <span class="globe-spin"></span>
-</div>
     <section class="hero-grid">
       <div class="hero-copy fade-in">
-        <p class="eyebrow">Static data story • 2025 economic freedom metrics • JANELLE GARDNER</p>
+        <p class="eyebrow">Static data story • 2025 economic freedom metrics</p>
         <h1>World Development Indicators: GDP, Population & Index of Economic Freedom.</h1>
         <p>
-          Compare national output, population scale, GDP per person,
-          and institutional indicators across 15 countries.
+          Compare national output, population scale, GDP per person, and selected
+          institutional indicators in one animated, browser-ready dashboard.
         </p>
         <a class="cta" href="#gdp-capita">Explore the visualizations</a>
       </div>
-
       <aside class="top-sidebar fade-in" aria-label="Top three Index of Economic Freedom countries">
         <h2>Top 3 in this dataset</h2>
-        <p>The highest 2025 Index of Economic Freedom scores.</p>
+        <p>Animated cards highlight the highest 2025 Index of Economic Freedom scores encoded below.</p>
         <div id="topCountries" class="country-cards"></div>
       </aside>
     </section>
@@ -60,655 +50,92 @@
     </section>
 
     <section id="gdp-capita" class="viz-section reveal">
-      <div class="section-copy">
+      <div class="dashboard-heading">
         <p class="eyebrow">Geographic heat map</p>
         <h2>GDP per capita shows output relative to population.</h2>
-        <p>
-          A high GDP total can reflect either very high productivity or a very large population.
-          GDP per capita normalizes output by population, making it a clearer comparison of
-          average economic production across countries.
-        </p>
       </div>
-
-      <div class="chart-wrap map-tile">
-        <div id="gdpPerCapitaMap" class="chart"></div>
+      <div class="dashboard-grid heatmap-layout">
+        <div class="chart-wrap compact-chart"><div id="gdpPerCapitaMap" class="chart"></div></div>
+        <div class="context-stack">
+          <article class="text-card section-copy">
+            <h3>Why GDP per person matters</h3>
+            <p>
+              A high GDP total can reflect either very high productivity or a very large population.
+              The paper notes that GDP per capita normalizes output by population, making it a
+              clearer comparison of average economic production across countries.
+            </p>
+          </article>
+          <article class="text-card source-card">
+            <h3>AP News China consumer prices context</h3>
+            <p>
+              Consumer-price reporting helps readers connect macroeconomic output to household
+              demand, inflation pressure, and purchasing conditions in a large economy.
+            </p>
+          </article>
+          <article class="text-card source-card">
+            <h3>AP News and Nigeria governance context</h3>
+            <p>
+              Related article context keeps the map tied to real policy and market stories while
+              preserving the same GDP, population, and institutional data used throughout the dashboard.
+            </p>
+          </article>
+        </div>
       </div>
-
-      <div class="article-insight-grid">
-  <article class="article-insight-card">
-    <span class="article-tag">Insight • GDP per capita</span>
-    <h3>GDP and Population</h3>
-    <p>
-      Countries with large populations, such as China and Mexico, may have high total GDP
-      but lower GDP per capita because national output is spread across many residents.
-      In contrast, smaller, highly developed countries such as Ireland and Finland rank
-      higher in GDP per capita due to stronger economic policies, infrastructure, and productivity.
-    </p>
-  </article>
-
-  <article class="article-insight-card">
-    <span class="article-tag">Research Insight • Living standards</span>
-    <h3>Wealth Distribution and Prosperity</h3>
-    <p>
-      Wealth distribution also plays a role in economic well-being. In countries such as
-      Nigeria and Thailand, economic activity does not always translate into higher individual
-      prosperity. This data shows that while large populations can generate substantial wealth,
-      GDP per capita often provides a clearer picture of living standards and economic well-being
-      (McCulla et al., 2015).
-    </p>
-  </article>
-
-  <article class="article-insight-card">
-    <span class="article-tag">Research Insight • Currency conversion</span>
-    <h3>Currency Conversion Clarity</h3>
-    <p>
-      Currency conversions help compare the economic scale and stability of other nations
-      relative to a shared currency. A country’s GDP may appear different when converted into
-      another currency, but a higher converted value does not always equal better living conditions
-      (Shapiro et al., 2022).
-    </p>
-  </article>
-</div>
-      
-      <p class="caption">
-        GDP-per-person interpretation follows the BEA GDP primer, OpenStax GDP comparison discussion, and World Bank World Development Indicators source framing.
-      </p>
+      <p class="caption">GDP-per-person interpretation follows the BEA GDP primer, OpenStax GDP comparison discussion, and World Bank World Development Indicators source framing.</p>
     </section>
 
-    <section id="gdp-population" class="viz-section reveal">
-      <div class="section-copy">
-        <p class="eyebrow">Geographic heat map</p>
-        <h2>GDP heat intensity shows national economic scale.</h2>
+    <section id="bubble" class="viz-section reveal">
+      <div class="dashboard-grid two-column-panel">
+        <div class="section-copy">
+        <p class="eyebrow">Geographic bubble chart</p>
+        <h2>GDP and population reveal different kinds of economic weight.</h2>
         <p>
-          The heat map compares GDP across selected countries, while hover labels provide
-          population and GDP per capita context for each economy.
+          Bubble size compares GDP while color compares population, showing why populous
+          countries can be central to global demand even when per-person output differs.
+          This context connects to the AP News discussion of consumer prices in China and
+          the CIA World Factbook summary of Bangladesh's economy.
         </p>
+        </div>
+        <div class="chart-wrap compact-chart"><div id="gdpPopulationBubble" class="chart"></div></div>
       </div>
-
-      <div class="chart-wrap map-tile">
-        <div id="gdpPopulationHeatMap" class="chart"></div>
-      </div>
-<div class="article-insight-grid">
-  <article class="article-insight-card">
-    <span class="article-tag">AP News • China</span>
-    <h3>Weak consumer prices signal soft demand.</h3>
-    <p>
-      AP reported that China’s consumer prices fell as weak domestic demand,
-      producer-price declines, and economic uncertainty continued to pressure
-      the country’s growth outlook.
-    </p>
-  </article>
-
-  <article class="article-insight-card">
-    <span class="article-tag">AP News • Nigeria</span>
-    <h3>Enforcement and trade risks shape economic context.</h3>
-    <p>
-      AP reported that Nigeria’s anti-narcotics agency worked with U.S. and U.K.
-      counterparts after a major cocaine seizure, highlighting how enforcement,
-      ports, and international cooperation affect economic stability.
-    </p>
-  </article>
-</div>
-      <p class="caption">
-        The visualization connects GDP, population, and consumer-demand context from AP News, the CIA World Factbook Bangladesh economy entry, and World Bank WDI.
-      </p>
+      <p class="caption">The visualization connects GDP, population, and consumer-demand context from AP News, the CIA World Factbook Bangladesh economy entry, and World Bank WDI.</p>
     </section>
 
     <section id="freedom" class="viz-section reveal">
-      <div class="section-copy">
-        <p class="eyebrow">Index of Economic Freedom</p>
-        <h2>Overall score, world rank, and GDP per capita compare economic outcomes.</h2>
+      <div class="dashboard-grid two-column-panel">
+        <div class="section-copy text-card">
+        <p class="eyebrow">Economic freedom geo chart</p>
+        <h2>Overall economic freedom scores add an institutional lens.</h2>
         <p>
-          These bar charts compare each country’s overall economic freedom score, world rank
-          strength, and GDP per capita. This keeps the comparison clear without using sunburst charts.
+          The paper treats economic freedom as a complement to GDP comparisons: property
+          rights, regulatory efficiency, open trade, and financial access can influence how
+          people and firms participate in growth. The BBC article on Nigeria EFCC property
+          seizures illustrates why governance and property-rights questions matter.
         </p>
-      </div>
-
-      <div class="bar-chart-grid">
-        <div class="chart-wrap">
-          <div id="overallScoreBar" class="chart"></div>
-        </div>
-
-        <div class="chart-wrap">
-          <div id="worldRankBar" class="chart"></div>
-        </div>
-
-        <div class="chart-wrap">
-          <div id="gdpPerCapitaBar" class="chart"></div>
         </div>
       </div>
-
-      <p class="caption">
-        Overall scores, world rank, and GDP per capita are based on the 2025 Index of Economic Freedom dataset.
-      </p>
+      <div class="freedom-chart-grid">
+        <div class="chart-wrap compact-chart"><div id="freedomMap" class="chart"></div></div>
+        <div class="chart-wrap compact-chart"><div id="freedomRankingChart" class="chart"></div></div>
+      </div>
+      <p class="caption">Caption: Overall scores and component definitions are based on the Heritage Foundation Index of Economic Freedom, with governance context from the BBC Nigeria EFCC article.</p>
     </section>
 
     <section id="components" class="viz-section reveal">
       <div class="section-copy">
-        <p class="eyebrow">Economic freedom components</p>
-        <h2>Economic freedom components vary across countries.</h2>
+        <p class="eyebrow">Country component bars</p>
+        <h2>Country Economic Snapshots: economic freedom components vary within each country.</h2>
         <p>
           A stacked bar chart compares property rights, business freedom, trade freedom,
           and financial freedom across all countries in one view.
         </p>
       </div>
-
-      <div class="chart-wrap">
-        <div id="componentCharts" class="chart"></div>
-      </div>
-
-      <p class="caption">
-        Component bars reference the Index of Economic Freedom categories listed in the supplied dataset.
-      </p>
+      <div id="componentCharts" class="component-grid"></div>
+      <p class="caption">Referenced from the Heritage Foundation Index of Economic Freedom and the related article set listed below.</p>
     </section>
 
-    <section id="country-snapshots" class="viz-section country-snapshot-section">
-  <div class="section-copy">
-    <p class="eyebrow">Country snapshots</p>
-    <h2>Country Economic Snapshots</h2>
-    <p>
-      Focused country snapshots connect real-world economic events to GDP,
-      consumer demand, production costs, living standards, and policy response.
-    </p>
-  </div>
-
-  <article class="country-snapshot-card china-infographic-layout">
-  <div class="snapshot-title-panel">
-    <div>
-      <span class="article-tag">AP News • China • February 2025</span>
-      <h3>China: Price Decline & GDP Slowdown</h3>
-      <p>
-        China’s February 2025 price decline signaled weak domestic demand,
-        deflation concerns, and broader economic strain.
-      </p>
-    </div>
-
-    <div class="snapshot-country-mark" aria-hidden="true">🇨🇳</div>
-  </div>
-
-  <div class="snapshot-stat-grid">
-    <article class="snapshot-stat-box">
-      <span>13 months</span>
-      <p>First decline after 13 months</p>
-    </article>
-
-    <article class="snapshot-stat-box">
-      <span>-0.7%</span>
-      <p>CPI compared with the previous February</p>
-    </article>
-
-    <article class="snapshot-stat-box">
-      <span>-0.2%</span>
-      <p>CPI compared with January</p>
-    </article>
-
-    <article class="snapshot-stat-box">
-      <span>-2.2%</span>
-      <p>Producer prices for production-level goods</p>
-    </article>
-  </div>
-
-  <div class="snapshot-info-section">
-    <h4>What drove the decline?</h4>
-
-    <div class="snapshot-mini-grid">
-      <div class="snapshot-mini-box">
-        <strong>Weak spending</strong>
-        <span>Sluggish domestic demand</span>
-      </div>
-
-      <div class="snapshot-mini-box">
-        <strong>Lunar New Year</strong>
-        <span>Holiday timing affected activity</span>
-      </div>
-
-      <div class="snapshot-mini-box">
-        <strong>Agriculture</strong>
-        <span>Favorable weather boosted supply</span>
-      </div>
-
-      <div class="snapshot-mini-box">
-        <strong>Fresh produce</strong>
-        <span>Higher supply lowered prices</span>
-      </div>
-
-      <div class="snapshot-mini-box">
-        <strong>Auto discounts</strong>
-        <span>Car makers promoted lower prices</span>
-      </div>
-
-      <div class="snapshot-mini-box">
-        <strong>Housing strain</strong>
-        <span>Real estate weakness continued</span>
-      </div>
-
-      <div class="snapshot-mini-box">
-        <strong>Trade pressure</strong>
-        <span>U.S. trade disputes added strain</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="snapshot-three-grid">
-    <article class="snapshot-info-card">
-      <span class="article-tag">Economic risk</span>
-      <h4>Why it matters</h4>
-      <p>
-        Falling prices may point to deflation risk, weak aggregate demand,
-        and broader economic strain rather than healthy growth.
-      </p>
-    </article>
-
-    <article class="snapshot-info-card">
-      <span class="article-tag">Policy response</span>
-      <h4>Government response discussed</h4>
-      <p>
-        Officials emphasized increasing aggregate demand, boosting household spending,
-        repurposing unsold homes, and revitalizing older neighborhoods.
-      </p>
-    </article>
-
-    <article class="snapshot-info-card">
-      <span class="article-tag">Missing strategy</span>
-      <h4>Unclear growth actions</h4>
-      <p>
-        Although officials discussed urgency, no clear business strategy or
-        decision-making plan was shared for economic growth.
-      </p>
-    </article>
-  </div>
-
-  <div class="snapshot-takeaway-band">
-    <strong>Key takeaway</strong>
-    <p>
-      Falling prices may seem positive for consumers, but they can also signal weak
-      demand, reduced confidence, and slower economic momentum.
-    </p>
-  </div>
-</article>
-
-   <article class="country-snapshot-card china-infographic-layout">
-  <div class="snapshot-title-panel">
-    <div>
-      <span class="article-tag">Country context • Nigeria</span>
-      <h3>Nigeria: Corruption & Property Rights Concerns</h3>
-      <p>
-        Nigeria’s snapshot adds context that the graphs cannot fully show:
-        corruption, anti-graft enforcement, and blurred property protections can
-        affect investment confidence and wealth distribution.
-      </p>
-    </div>
-
-    <div class="snapshot-country-mark" aria-hidden="true">🇳🇬</div>
-  </div>
-
-  <div class="snapshot-stat-grid">
-    <article class="snapshot-stat-box">
-      <span>EFCC</span>
-      <p>Anti-graft enforcement agency tied to major property seizures</p>
-    </article>
-
-    <article class="snapshot-stat-box">
-      <span>750+</span>
-      <p>Properties reportedly confiscated in a major corruption case</p>
-    </article>
-
-    <article class="snapshot-stat-box">
-      <span>Graft</span>
-      <p>Political authority used for personal gain can weaken institutional trust</p>
-    </article>
-
-    <article class="snapshot-stat-box">
-      <span>Trust</span>
-      <p>Blurred property protections can discourage investment and fair wealth access</p>
-    </article>
-  </div>
-
-  <div class="snapshot-info-section">
-    <h4>What this explains beyond the graph</h4>
-
-    <div class="snapshot-mini-grid">
-      <div class="snapshot-mini-box">
-        <strong>Property rights</strong>
-        <span>Confiscations may target illegal assets, but unclear policies can still create uncertainty</span>
-      </div>
-
-      <div class="snapshot-mini-box">
-        <strong>Corruption</strong>
-        <span>Systemic corruption can reduce trust in public institutions and legal protections</span>
-      </div>
-
-      <div class="snapshot-mini-box">
-        <strong>Investment risk</strong>
-        <span>Businesses may hesitate when ownership protections feel inconsistent</span>
-      </div>
-
-      <div class="snapshot-mini-box">
-        <strong>Wealth distribution</strong>
-        <span>Economic power may remain concentrated rather than broadly benefiting citizens</span>
-      </div>
-
-      <div class="snapshot-mini-box">
-        <strong>Governance</strong>
-        <span>Anti-corruption enforcement shows action, but also reveals deeper institutional weaknesses</span>
-      </div>
-
-      <div class="snapshot-mini-box">
-        <strong>Living standards</strong>
-        <span>GDP alone does not show whether citizens can access resources equitably</span>
-      </div>
-
-      <div class="snapshot-mini-box">
-        <strong>Policy clarity</strong>
-        <span>Clear legal standards are needed for stronger ownership confidence</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="snapshot-takeaway-band">
-    <strong>Key takeaway</strong>
-    <p>
-      Nigeria shows how corruption and unclear property protections can shape economic
-well-being beyond what GDP visuals alone can show.
-    </p>
-  </div>
-</article>
-
-<article class="country-snapshot-card china-infographic-layout">
-  <div class="snapshot-title-panel">
-    <div>
-      <span class="article-tag">Country context • Bangladesh</span>
-      <h3>Bangladesh: Growth Despite Structural Challenges</h3>
-      <p>
-        Bangladesh’s snapshot adds context about long-term economic expansion,
-        workforce structure, and the balance between service-sector growth and
-        agricultural employment.
-      </p>
-    </div>
-
-    <div class="snapshot-country-mark" aria-hidden="true">🇧🇩</div>
-  </div>
-
-  <div class="snapshot-stat-grid">
-    <article class="snapshot-stat-box">
-      <span>6%</span>
-      <p>Approximate annual economic expansion since 2005</p>
-    </article>
-
-    <article class="snapshot-stat-box">
-      <span>Services</span>
-      <p>Service activity drives a major share of GDP</p>
-    </article>
-
-    <article class="snapshot-stat-box">
-      <span>Farming</span>
-      <p>A large portion of the workforce remains connected to agriculture</p>
-    </article>
-
-    <article class="snapshot-stat-box">
-      <span>Barriers</span>
-      <p>Infrastructure and slower policy changes still affect development</p>
-    </article>
-  </div>
-
-  <div class="snapshot-info-section">
-    <h4>What this explains beyond the graph</h4>
-
-    <div class="snapshot-mini-grid">
-      <div class="snapshot-mini-box">
-        <strong>Growth record</strong>
-        <span>Consistent expansion shows resilience despite economic and policy challenges</span>
-      </div>
-
-      <div class="snapshot-mini-box">
-        <strong>Service sector</strong>
-        <span>Services contribute strongly to GDP and economic modernization</span>
-      </div>
-
-      <div class="snapshot-mini-box">
-        <strong>Agriculture</strong>
-        <span>A large agricultural workforce can limit productivity gains and income growth</span>
-      </div>
-
-      <div class="snapshot-mini-box">
-        <strong>Infrastructure</strong>
-        <span>Weak infrastructure can slow business growth, transportation, and investment</span>
-      </div>
-
-      <div class="snapshot-mini-box">
-        <strong>Policy pace</strong>
-        <span>Slow policy change can reduce flexibility in a growing economy</span>
-      </div>
-
-      <div class="snapshot-mini-box">
-        <strong>Labor mix</strong>
-        <span>Workforce distribution affects wages, productivity, and living standards</span>
-      </div>
-
-      <div class="snapshot-mini-box">
-        <strong>Economic stability</strong>
-        <span>Growth is stronger when supported by infrastructure, policy, and workforce development</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="snapshot-takeaway-band">
-    <strong>Key takeaway</strong>
-    <p>
-      Bangladesh shows that long-term GDP growth can coexist with infrastructure,
-      workforce, and policy challenges that affect broader economic well-being.
-    </p>
-  </div>
-</article>
-
-<article class="country-snapshot-card china-infographic-layout">
-  <div class="snapshot-title-panel">
-    <div>
-      <span class="article-tag">Country context • Cuba</span>
-      <h3>Cuba: Why GDP Alone Is Incomplete</h3>
-      <p>
-        Cuba’s snapshot adds context about why reported income measures do not fully
-        explain economic opportunity, living standards, or institutional limitations.
-      </p>
-    </div>
-
-    <div class="snapshot-country-mark" aria-hidden="true">🇨🇺</div>
-  </div>
-
-  <div class="snapshot-stat-grid">
-    <article class="snapshot-stat-box">
-      <span>Access</span>
-      <p>Resource access helps determine whether income translates into well-being</p>
-    </article>
-
-    <article class="snapshot-stat-box">
-      <span>Policy</span>
-      <p>Institutional restrictions can limit business activity and opportunity</p>
-    </article>
-
-    <article class="snapshot-stat-box">
-      <span>Equity</span>
-      <p>GDP per person does not show how wealth is distributed</p>
-    </article>
-
-    <article class="snapshot-stat-box">
-      <span>Living</span>
-      <p>Cost of living and availability of resources shape real prosperity</p>
-    </article>
-  </div>
-
-  <div class="snapshot-info-section">
-    <h4>What this explains beyond the graph</h4>
-
-    <div class="snapshot-mini-grid">
-      <div class="snapshot-mini-box">
-        <strong>GDP limits</strong>
-        <span>Per capita GDP does not fully describe household conditions</span>
-      </div>
-
-      <div class="snapshot-mini-box">
-        <strong>Resource access</strong>
-        <span>Access to goods, services, and opportunity affects quality of life</span>
-      </div>
-
-      <div class="snapshot-mini-box">
-        <strong>Policy restrictions</strong>
-        <span>Government limits can reduce entrepreneurship and market flexibility</span>
-      </div>
-
-      <div class="snapshot-mini-box">
-        <strong>Cost of living</strong>
-        <span>Nominal income can look different from lived economic comfort</span>
-      </div>
-
-      <div class="snapshot-mini-box">
-        <strong>Distribution</strong>
-        <span>Average income can hide uneven economic access</span>
-      </div>
-
-      <div class="snapshot-mini-box">
-        <strong>Opportunity</strong>
-        <span>Institutional barriers can reduce individual economic mobility</span>
-      </div>
-
-      <div class="snapshot-mini-box">
-        <strong>Context</strong>
-        <span>Living standards require more than one macroeconomic measure</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="snapshot-takeaway-band">
-    <strong>Key takeaway</strong>
-    <p>
-      Cuba shows why GDP should be interpreted alongside resource access, cost of living,
-      and institutional context rather than treated as a complete measure of prosperity.
-    </p>
-  </div>
-</article>
-
-<article class="country-snapshot-card china-infographic-layout">
-  <div class="snapshot-title-panel">
-    <div>
-      <span class="article-tag">Country context • Ukraine</span>
-      <h3>Ukraine: Uncertainty & Missing Context</h3>
-      <p>
-        Ukraine’s snapshot explains why missing ranking data and unstable conditions make
-        direct comparison difficult, even when GDP per capita provides partial context.
-      </p>
-    </div>
-
-    <div class="snapshot-country-mark" aria-hidden="true">🇺🇦</div>
-  </div>
-
-  <div class="snapshot-stat-grid">
-    <article class="snapshot-stat-box">
-      <span>Data gaps</span>
-<p>Unstable conditions make economic comparison less complete</p>
-    </article>
-
-    <article class="snapshot-stat-box">
-      <span>Risk</span>
-      <p>Government conflict and instability can affect economic performance</p>
-    </article>
-
-    <article class="snapshot-stat-box">
-      <span>Infrastructure</span>
-      <p>Weak or damaged infrastructure can restrict growth and investment</p>
-    </article>
-
-    <article class="snapshot-stat-box">
-      <span>Policy</span>
-      <p>Slow or disrupted policy change can make economic outcomes harder to compare</p>
-    </article>
-  </div>
-
-  <div class="snapshot-info-section">
-    <h4>What this explains beyond the graph</h4>
-
-    <div class="snapshot-mini-grid">
-      <div class="snapshot-mini-box">
-        <strong>Data gaps</strong>
-<span>Conflict and instability can leave important economic context incomplete</span>
-      </div>
-
-      <div class="snapshot-mini-box">
-        <strong>Conflict</strong>
-        <span>Political and security instability can distort economic comparisons</span>
-      </div>
-
-      <div class="snapshot-mini-box">
-        <strong>Infrastructure</strong>
-        <span>Infrastructure damage or weakness affects productivity and access</span>
-      </div>
-
-      <div class="snapshot-mini-box">
-        <strong>Policy disruption</strong>
-        <span>Policy uncertainty can affect investment and economic recovery</span>
-      </div>
-
-      <div class="snapshot-mini-box">
-        <strong>Comparison limits</strong>
-        <span>Too many missing variables prevent a clean ranking estimate</span>
-      </div>
-
-      <div class="snapshot-mini-box">
-        <strong>GDP context</strong>
-        <span>GDP per capita offers context but does not replace institutional data</span>
-      </div>
-
-      <div class="snapshot-mini-box">
-        <strong>Recovery path</strong>
-        <span>Stability and infrastructure are central to future economic strength</span>
-      </div>
-    </div>
-  </div>
-
- <div class="snapshot-takeaway-band">
-  <strong>Key takeaway</strong>
-  <p>
-    Economic performance cannot be understood through GDP alone. Ukraine highlights
-    how instability, infrastructure challenges, and incomplete information can
-    significantly affect economic outcomes.
-  </p>
-</div>
-</article>
-
-      <div class="snapshot-info-section snapshot-comparison-strip">
-  <h4>Additional Comparison Notes</h4>
-
-  <div class="snapshot-mini-grid">
-    <div class="snapshot-mini-box">
-      <strong>Cameroon</strong>
-      <span>Economic outcomes are shaped by lower income levels, institutional limits, and development barriers.</span>
-    </div>
-
-    <div class="snapshot-mini-box">
-      <strong>El Salvador</strong>
-      <span>Policy structure and economic reforms can affect how a lower-income economy performs beyond GDP alone.</span>
-    </div>
-
-    <div class="snapshot-mini-box">
-      <strong>Trinidad & Tobago</strong>
-      <span>Energy resources and trade exposure can influence economic strength, but do not fully explain household prosperity.</span>
-    </div>
-
-    <div class="snapshot-mini-box">
-      <strong>Vietnam</strong>
-      <span>Manufacturing, trade activity, and policy direction help explain growth beyond what a single GDP figure shows.</span>
-    </div>
-  </div>
-</div>
-      
- <p class="caption">
-  Country context notes are based on AP News reporting, the CIA World Factbook,
-  and supporting economic research used throughout this project.
-</p>
- </section>
-    
     <section id="references" class="references panel reveal">
       <h2>References and sources</h2>
-
       <ul>
         <li><a href="https://apnews.com/" target="_blank" rel="noreferrer">AP News</a> — article about China consumer prices.</li>
         <li><a href="https://www.bbc.com/news/" target="_blank" rel="noreferrer">BBC News</a> — article about Nigeria EFCC property seizures.</li>
@@ -722,7 +149,6 @@ well-being beyond what GDP visuals alone can show.
   </main>
 
   <button class="to-top" aria-label="Back to top">↑</button>
-
   <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
   <script src="script.js"></script>
 </body>
