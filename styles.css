@@ -91,8 +91,8 @@ main { width: min(1220px, calc(100% - 2rem)); margin: 0 auto 4rem; }
   border-radius: 28px;
   pointer-events: none;
   background:
-    radial-gradient(circle at 12% 18%, rgba(255, 145, 77, 0.16), transparent 22rem),
-    radial-gradient(circle at 90% 12%, rgba(255, 209, 102, 0.12), transparent 24rem);
+    radial-gradient(circle at 12% 18%, rgba(255, 145, 77, 0.13), transparent 22rem),
+    radial-gradient(circle at 90% 12%, rgba(255, 209, 102, 0.10), transparent 24rem);
   opacity: 0.9;
 }
 
@@ -103,47 +103,58 @@ main { width: min(1220px, calc(100% - 2rem)); margin: 0 auto 4rem; }
 }
 
 .deep-dive-grid {
+  display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
 }
 
 .deep-dive-card {
   position: relative;
   overflow: hidden;
-  border-color: rgba(255, 165, 89, 0.42);
+  border-radius: 22px;
+  padding: 1rem;
+  min-height: 245px;
+  border: 1px solid rgba(255, 165, 89, 0.45);
   background:
-    linear-gradient(145deg, rgba(255, 123, 71, 0.20), rgba(255, 209, 102, 0.08)),
+    linear-gradient(145deg, rgba(255, 126, 64, 0.24), rgba(255, 209, 102, 0.10)),
     rgba(255, 255, 255, 0.08);
-  border-radius: 999px;
-  padding: 1.15rem 1.25rem;
   box-shadow:
     0 18px 48px rgba(255, 112, 67, 0.10),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
 }
 
 .deep-dive-card::after {
   content: "";
   position: absolute;
-  width: 8rem;
-  height: 8rem;
-  right: -3.5rem;
-  top: -3.5rem;
-  border-radius: 999px;
-  background: rgba(255, 209, 102, 0.16);
-  filter: blur(1px);
+  width: 7rem;
+  height: 7rem;
+  right: -3rem;
+  top: -3rem;
+  border-radius: 50%;
+  background: rgba(255, 209, 102, 0.13);
+  pointer-events: none;
 }
 
 .deep-dive-card h3 {
+  position: relative;
+  z-index: 1;
+  margin: 0.5rem 0 0.45rem;
   color: #fff7ed;
-  margin-top: 0.45rem;
+  font-size: 1rem;
 }
 
 .deep-dive-card p {
+  position: relative;
+  z-index: 1;
   color: #f9dcc4;
   font-size: 0.88rem;
-  line-height: 1.48;
+  line-height: 1.5;
 }
 
 .deep-dive-tag {
+  position: relative;
+  z-index: 1;
   display: inline-flex;
   align-items: center;
   width: fit-content;
@@ -172,7 +183,7 @@ main { width: min(1220px, calc(100% - 2rem)); margin: 0 auto 4rem; }
   }
 
   .deep-dive-card {
-    border-radius: 26px;
+    min-height: auto;
   }
 }
 
@@ -182,7 +193,8 @@ main { width: min(1220px, calc(100% - 2rem)); margin: 0 auto 4rem; }
   }
 
   .deep-dive-card {
-    border-radius: 22px;
+    border-radius: 18px;
+    min-height: auto;
   }
 }
 .references ul { display: grid; gap: 0.75rem; color: var(--muted); padding-left: 1.2rem; }
