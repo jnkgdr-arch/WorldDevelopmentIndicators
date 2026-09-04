@@ -18,8 +18,15 @@ const countries = [
 
 const darkPlot = "rgba(7, 17, 31, 0.98)";
 const chartFont = { family: "Inter, Arial, sans-serif", color: "#f4f7fb" };
+const chartTitle = (text) => ({ text, font: { size: 15, color: "#f4f7fb" }, x: 0.02, xanchor: "left" });
+const axisFont = { size: 11, color: "#b8c3d4" };
+const tickFont = { size: 9, color: "#b8c3d4" };
+const compactColorbar = (title) => ({
+  title: { text: title, font: { size: 10, color: "#f4f7fb" } },
+  tickfont: { size: 9, color: "#f4f7fb" }, thickness: 9, len: 0.7, xpad: 4
+});
 const geoBase = { projection: { type: "natural earth" }, bgcolor: darkPlot, showframe: false, showcoastlines: true, coastlinecolor: "#4d6685", showland: true, landcolor: "#132a44", showocean: true, oceancolor: "#07111f", showcountries: true, countrycolor: "#36506d" };
-const chartLayout = { paper_bgcolor: darkPlot, plot_bgcolor: darkPlot, margin: { t: 42, r: 10, b: 14, l: 10 }, font: chartFont, geo: geoBase };
+const chartLayout = { paper_bgcolor: darkPlot, plot_bgcolor: darkPlot, margin: { t: 36, r: 8, b: 8, l: 8 }, font: chartFont, geo: geoBase };
 const mentionedCountries = countries;
 const pulseTraceIndices = {};
 const componentMetrics = [
@@ -30,7 +37,7 @@ const componentMetrics = [
 ];
 
 function darkCartesianLayout(title, extra = {}) {
-  return { title, paper_bgcolor: darkPlot, plot_bgcolor: darkPlot, font: chartFont, margin: { t: 50, r: 20, b: 44, l: 112 }, xaxis: { gridcolor: "#243a56", zerolinecolor: "#4d6685" }, yaxis: { gridcolor: "#243a56", automargin: true }, ...extra };
+  return { title: chartTitle(title), paper_bgcolor: darkPlot, plot_bgcolor: darkPlot, font: chartFont, margin: { t: 38, r: 12, b: 42, l: 60 }, xaxis: { gridcolor: "#243a56", zerolinecolor: "#4d6685", tickfont: tickFont }, yaxis: { gridcolor: "#243a56", automargin: true, tickfont: tickFont }, ...extra };
 }
 
 function pulseTrace() {
@@ -57,23 +64,23 @@ function renderTopCountries() {
 
 function renderGeoCharts() {
   Plotly.newPlot("gdpPerCapitaMap", [{
-    type: "choropleth", locations: countries.map(c => c.iso3), z: countries.map(c => c.gdpPerCapita), text: countries.map(c => `${c.name}: $${c.gdpPerCapita.toLocaleString()}`), colorscale: "Viridis", colorbar: { title: "GDP per capita", tickfont: { color: "#f4f7fb" }, titlefont: { color: "#f4f7fb" } }
-  }, pulseTrace()], { ...chartLayout, title: "GDP per capita for all 15 countries" }, { responsive: true, displayModeBar: false });
+    type: "choropleth", locations: countries.map(c => c.iso3), z: countries.map(c => c.gdpPerCapita), text: countries.map(c => `${c.name}: $${c.gdpPerCapita.toLocaleString()}`), colorscale: "Viridis", colorbar: compactColorbar("GDP per capita")
+  }, pulseTrace()], { ...chartLayout, title: chartTitle("GDP per capita for all 15 countries") }, { responsive: true, displayModeBar: false });
   rememberPulse("gdpPerCapitaMap", 1);
 
   Plotly.newPlot("gdpPopulationHeatMap", [{
-    type: "choropleth", locations: countries.map(c => c.iso3), z: countries.map(c => c.gdp), text: countries.map(c => c.name), customdata: countries.map(c => [c.population, c.gdpPerCapita]), colorscale: "Portland", colorbar: { title: "GDP (US$B)", tickfont: { color: "#f4f7fb" }, titlefont: { color: "#f4f7fb" } }, hovertemplate: "%{text}<br>GDP: $%{z:,.1f}B<br>Population: %{customdata[0]:,.1f}M<br>GDP per capita: $%{customdata[1]:,}<extra></extra>"
-  }, pulseTrace()], { ...chartLayout, title: "GDP heat map with population context for all 15 countries" }, { responsive: true, displayModeBar: false });
+    type: "choropleth", locations: countries.map(c => c.iso3), z: countries.map(c => c.gdp), text: countries.map(c => c.name), customdata: countries.map(c => [c.population, c.gdpPerCapita]), colorscale: "Portland", colorbar: compactColorbar("GDP (US$B)"), hovertemplate: "%{text}<br>GDP: $%{z:,.1f}B<br>Population: %{customdata[0]:,.1f}M<br>GDP per capita: $%{customdata[1]:,}<extra></extra>"
+  }, pulseTrace()], { ...chartLayout, title: chartTitle("GDP heat map with population context for all 15 countries") }, { responsive: true, displayModeBar: false });
   rememberPulse("gdpPopulationHeatMap", 1);
 
   Plotly.newPlot("freedomMap", [{
-    type: "choropleth", locations: countries.map(c => c.iso3), z: countries.map(c => c.freedomScore), text: countries.map(c => `${c.name}: ${c.freedomScore}`), colorscale: "YlGnBu", zmin: 40, zmax: 90, colorbar: { title: "Score", tickfont: { color: "#f4f7fb" }, titlefont: { color: "#f4f7fb" } }
-  }, pulseTrace()], { ...chartLayout, title: "2025 Index of Economic Freedom scores for all 15 countries" }, { responsive: true, displayModeBar: false });
+    type: "choropleth", locations: countries.map(c => c.iso3), z: countries.map(c => c.freedomScore), text: countries.map(c => `${c.name}: ${c.freedomScore}`), colorscale: "YlGnBu", zmin: 40, zmax: 90, colorbar: compactColorbar("Score")
+  }, pulseTrace()], { ...chartLayout, title: chartTitle("2025 Index of Economic Freedom scores for all 15 countries") }, { responsive: true, displayModeBar: false });
   rememberPulse("freedomMap", 1);
 
   Plotly.newPlot("freedomRankingChart", [{
     type: "bar", x: countries.map(c => c.freedomScore), y: countries.map(c => c.name), orientation: "h", text: countries.map(c => `Rank ${c.worldRank}`), textposition: "auto", hovertext: countries.map(c => `${c.name}<br>Score: ${c.freedomScore}<br>World rank: ${c.worldRank}`), marker: { color: countries.map(c => c.freedomScore), colorscale: "YlGnBu", line: { color: "#ffd166", width: 1 } }
-  }], darkCartesianLayout("Economic freedom score and world rank for all 15 countries", { xaxis: { range: [0, 100], title: "Score", gridcolor: "#243a56" } }), { responsive: true, displayModeBar: false });
+  }], darkCartesianLayout("Economic freedom score and world rank for all 15 countries", { margin: { t: 38, r: 12, b: 38, l: 116 }, xaxis: { range: [0, 100], title: { text: "Score", font: axisFont }, tickfont: tickFont, gridcolor: "#243a56" }, yaxis: { automargin: true, tickfont: tickFont, gridcolor: "#243a56" }, uniformtext: { minsize: 9, mode: "show" } }), { responsive: true, displayModeBar: false });
 }
 
 function renderComponentCharts() {
@@ -86,7 +93,7 @@ function renderComponentCharts() {
 
   snapshotMetrics.forEach(metric => {
     const id = `snapshot-${metric.key}`;
-    grid.insertAdjacentHTML("beforeend", `<article class="chart-wrap snapshot-chart"><div id="${id}" class="chart"></div></article>`);
+    grid.insertAdjacentHTML("beforeend", `<article class="chart-wrap chart-sm snapshot-chart"><div id="${id}" class="chart"></div></article>`);
     Plotly.newPlot(id, [{
       type: "bar",
       x: countries.map(c => c.name),
@@ -94,9 +101,9 @@ function renderComponentCharts() {
       marker: { color: metric.color, line: { color: "rgba(255,255,255,0.55)", width: 1 } },
       hovertemplate: `%{x}<br>${metric.label}: %{y}<extra></extra>`
     }], darkCartesianLayout(`${metric.label}: all 15 countries`, {
-      margin: { t: 48, r: 14, b: 112, l: 52 },
-      yaxis: { range: metric.range, title: metric.axis, gridcolor: "#243a56" },
-      xaxis: { tickangle: -42, gridcolor: "#243a56" }
+      margin: { t: 38, r: 10, b: 78, l: 46 },
+      yaxis: { range: metric.range, title: { text: metric.axis, font: axisFont }, tickfont: tickFont, gridcolor: "#243a56" },
+      xaxis: { tickangle: -38, tickfont: { ...tickFont, size: 8.5 }, gridcolor: "#243a56" }
     }), { responsive: true, displayModeBar: false });
   });
 }
@@ -105,8 +112,8 @@ function renderIndexComparisonCharts() {
   const grid = document.querySelector("#indexComparisonCharts");
   componentMetrics.forEach(metric => {
     const id = `${metric.key}Comparison`;
-    grid.insertAdjacentHTML("beforeend", `<article class="chart-wrap compact-chart"><div id="${id}" class="chart"></div></article>`);
-    Plotly.newPlot(id, [{ type: "bar", x: countries.map(c => c.name), y: countries.map(c => c[metric.key]), marker: { color: metric.color, line: { color: "#ffd166", width: 1 } }, hovertemplate: `%{x}<br>${metric.label}: %{y}<extra></extra>` }], darkCartesianLayout(`${metric.label}: all 15 countries`, { margin: { t: 48, r: 14, b: 112, l: 48 }, yaxis: { range: [0, 100], title: "Score", gridcolor: "#243a56" }, xaxis: { tickangle: -42, gridcolor: "#243a56" } }), { responsive: true, displayModeBar: false });
+    grid.insertAdjacentHTML("beforeend", `<article class="chart-wrap chart-sm"><div id="${id}" class="chart"></div></article>`);
+    Plotly.newPlot(id, [{ type: "bar", x: countries.map(c => c.name), y: countries.map(c => c[metric.key]), marker: { color: metric.color, line: { color: "#ffd166", width: 1 } }, hovertemplate: `%{x}<br>${metric.label}: %{y}<extra></extra>` }], darkCartesianLayout(`${metric.label}: all 15 countries`, { margin: { t: 38, r: 10, b: 76, l: 46 }, yaxis: { range: [0, 100], title: { text: "Score", font: axisFont }, tickfont: tickFont, gridcolor: "#243a56" }, xaxis: { tickangle: -38, tickfont: tickFont, gridcolor: "#243a56" } }), { responsive: true, displayModeBar: false });
   });
 
   const topThree = countries.slice().sort((a, b) => b.freedomScore - a.freedomScore).slice(0, 3);
@@ -126,10 +133,10 @@ function renderIndexComparisonCharts() {
     hovertemplate: `${country.name}<br>%{y}: %{x}<extra></extra>`
   })), darkCartesianLayout("Top-three side-by-side index comparison", {
     barmode: "group",
-    margin: { t: 50, r: 24, b: 56, l: 140 },
-    xaxis: { title: "Index value / rank", gridcolor: "#243a56", zerolinecolor: "#4d6685" },
-    yaxis: { automargin: true, gridcolor: "#243a56" },
-    legend: { orientation: "h", y: -0.18, font: { color: "#f4f7fb" } }
+    margin: { t: 38, r: 12, b: 55, l: 112 },
+    xaxis: { title: { text: "Index value / rank", font: axisFont }, tickfont: tickFont, gridcolor: "#243a56", zerolinecolor: "#4d6685" },
+    yaxis: { automargin: true, tickfont: tickFont, gridcolor: "#243a56" },
+    legend: { orientation: "h", y: -0.2, font: { size: 10, color: "#f4f7fb" } }
   }), { responsive: true, displayModeBar: false });
 }
 
